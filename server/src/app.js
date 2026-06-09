@@ -7,6 +7,8 @@ import logger from './utils/logger.js';
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
+import wishlistRoutes from './routes/wishlistRoutes.js';
 
 const app = express();
 
@@ -38,6 +40,8 @@ app.use(
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'ShopSphere API is running' });
@@ -45,10 +49,14 @@ app.get('/health', (req, res) => {
 
 // 5. Global Error Handler
 app.use((err, req, res, next) => {
-  logger.error(`Unhandled Error: ${err.message}`, { stack: err.stack });
-  res.status(500).json({
+  const statusCode = err.statusCode || 500;
+  if (statusCode === 500) {
+    logger.error(`Unhandled Error: ${err.message}`, { stack: err.stack });
+  }
+
+  res.status(statusCode).json({
     success: false,
-    message: 'Internal Server Error',
+    message: statusCode === 500 ? 'Internal Server Error' : err.message,
     ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
   });
 });

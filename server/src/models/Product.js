@@ -58,7 +58,6 @@ productSchema.index({ title: 'text', description: 'text', tags: 'text' });
 productSchema.index({ tags: 1 });
 // Additional Performance Indexes
 productSchema.index({ category: 1, price: 1 });
-productSchema.index({ seller: 1 });
 productSchema.index({ averageRating: -1 });
 productSchema.index({ status: 1, category: 1 });
 productSchema.index({ status: 1, isDeleted: 1 });

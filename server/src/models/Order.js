@@ -11,6 +11,7 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
     totalAmount: { type: Number, required: true },
     discountAmount: { type: Number, default: 0 },
+    couponCode: { type: String },
     shippingAddress: {
       street: { type: String, required: true },
       city: { type: String, required: true },
