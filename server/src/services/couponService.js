@@ -57,5 +57,34 @@ export const couponService = {
       discountAmount,
       finalTotal
     };
+  },
+
+  createCoupon: async (data) => {
+    // Optionally ensure code is uppercase
+    if (data.code) data.code = data.code.toUpperCase();
+    return couponRepository.create(data);
+  },
+
+  getCoupons: async () => {
+    return couponRepository.findAll();
+  },
+
+  getCouponById: async (id) => {
+    const coupon = await couponRepository.findById(id);
+    if (!coupon) throw Object.assign(new Error('Coupon not found'), { statusCode: 404 });
+    return coupon;
+  },
+
+  updateCoupon: async (id, data) => {
+    if (data.code) data.code = data.code.toUpperCase();
+    const coupon = await couponRepository.update(id, data);
+    if (!coupon) throw Object.assign(new Error('Coupon not found'), { statusCode: 404 });
+    return coupon;
+  },
+
+  deleteCoupon: async (id) => {
+    const coupon = await couponRepository.delete(id);
+    if (!coupon) throw Object.assign(new Error('Coupon not found'), { statusCode: 404 });
+    return coupon;
   }
 };

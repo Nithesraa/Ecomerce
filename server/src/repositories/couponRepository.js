@@ -15,5 +15,25 @@ export const couponRepository = {
       },
       { returnDocument: 'after' }
     );
+  },
+
+  create: async (data) => {
+    return Coupon.create(data);
+  },
+
+  findAll: async () => {
+    return Coupon.find().sort({ createdAt: -1 });
+  },
+
+  findById: async (id) => {
+    return Coupon.findById(id);
+  },
+
+  update: async (id, data) => {
+    return Coupon.findByIdAndUpdate(id, data, { returnDocument: 'after', runValidators: true });
+  },
+
+  delete: async (id) => {
+    return Coupon.findByIdAndDelete(id);
   }
 };
