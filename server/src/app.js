@@ -11,8 +11,10 @@ import cartRoutes from './routes/cartRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
 import checkoutRoutes from './routes/checkoutRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-import paymentRoutes from './routes/paymentRoutes.js';
 import couponRoutes from './routes/couponRoutes.js';
+import webhookRoutes from './routes/webhookRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
+import adminOrderRoutes from './routes/adminOrderRoutes.js';
 
 const app = express();
 
@@ -26,6 +28,9 @@ app.use(
 );
 
 // 2. Request Parsing
+// Webhooks MUST be parsed as raw buffers for crypto signature verification
+app.use('/api/webhooks', express.raw({ type: 'application/json' }), webhookRoutes);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -50,6 +55,8 @@ app.use('/api/checkout', checkoutRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/coupons', couponRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/admin/orders', adminOrderRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'ShopSphere API is running' });

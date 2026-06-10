@@ -14,6 +14,9 @@ export const razorpayService = {
       amount: Math.round(amount * 100),
       currency: 'INR',
       receipt: receiptId.toString(),
+      notes: {
+        orderId: receiptId.toString()
+      }
     };
     
     // Automatically mock Razorpay response during isolated testing
@@ -41,6 +44,19 @@ export const razorpayService = {
       .update(text)
       .digest('hex');
       
+    return expectedSignature === signature;
+  },
+
+  verifyWebhookSignature: (rawBody, signature) => {
+    if (env.RAZORPAY_KEY_ID === 'mock_key_id' || !env.RAZORPAY_KEY_ID) {
+      return signature === 'mock_webhook_signature';
+    }
+
+    const expectedSignature = crypto
+      .createHmac('sha256', env.RAZORPAY_WEBHOOK_SECRET)
+      .update(rawBody)
+      .digest('hex');
+
     return expectedSignature === signature;
   }
 };

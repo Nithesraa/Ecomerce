@@ -32,5 +32,25 @@ export const orderRepository = {
       session.endSession();
       throw error;
     }
+  },
+
+  find: async (query, options = {}) => {
+    return Order.find(query).skip(options.skip || 0).limit(options.limit || 0).sort(options.sort);
+  },
+
+  count: async (query) => {
+    return Order.countDocuments(query);
+  },
+
+  findById: async (id) => {
+    return Order.findById(id);
+  },
+
+  findOrderItems: async (query, options = {}) => {
+    return OrderItem.find(query).sort(options.sort).populate('product');
+  },
+
+  updateOrder: async (id, updateData) => {
+    return Order.findByIdAndUpdate(id, updateData, { returnDocument: 'after' });
   }
 };
