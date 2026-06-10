@@ -6,8 +6,22 @@ const hydrateAndCalculateTotal = async (cartItems) => {
   const itemsForFrontend = [];
   let totalAmount = 0;
 
+  if (!cartItems || cartItems.length === 0) {
+    return { itemsForDb, itemsForFrontend, totalAmount };
+  }
+
+  // Optimize N+1 query: fetch all products at once
+  const productIds = [...new Set(cartItems.map(item => item.product.toString()))];
+  const products = await Product.find({ _id: { $in: productIds } });
+  
+  // Create an in-memory map for O(1) lookups
+  const productMap = new Map();
+  for (const p of products) {
+    productMap.set(p._id.toString(), p);
+  }
+
   for (const item of cartItems) {
-    const product = await Product.findById(item.product);
+    const product = productMap.get(item.product.toString());
     
     // Auto-remove products that no longer exist, are deleted, or are not ACTIVE
     if (!product || product.isDeleted || product.status !== 'ACTIVE') {

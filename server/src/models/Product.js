@@ -59,8 +59,7 @@ productSchema.index({ tags: 1 });
 // Additional Performance Indexes
 productSchema.index({ category: 1, price: 1 });
 productSchema.index({ averageRating: -1 });
-productSchema.index({ status: 1, category: 1 });
-productSchema.index({ status: 1, isDeleted: 1 });
-productSchema.index({ status: 1, category: 1, isDeleted: 1 });
+productSchema.index({ category: 1, status: 1, isDeleted: 1 });
+productSchema.index({ seller: 1, status: 1 });
 
 export const Product = mongoose.model('Product', productSchema);

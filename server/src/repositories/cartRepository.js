@@ -32,14 +32,17 @@ export const cartRepository = {
     const redis = getRedisClient();
     const redisKey = `cart:${userId}`;
 
-    // 1. Update MongoDB (Source of Truth for Write-Through)
+    // 1. Invalidate Redis Cache first to prevent stale data on crashes
+    await redis.del(redisKey);
+
+    // 2. Update MongoDB (Source of Truth)
     const updatedCart = await Cart.findOneAndUpdate(
       { user: userId },
       cartData,
       { returnDocument: 'after', upsert: true }
     );
 
-    // 2. Update Redis
+    // 3. Update Redis with new state
     await redis.setex(redisKey, CART_TTL, JSON.stringify(updatedCart));
 
     return updatedCart;
@@ -49,14 +52,17 @@ export const cartRepository = {
     const redis = getRedisClient();
     const redisKey = `cart:${userId}`;
 
-    // Clear items in MongoDB
+    // 1. Invalidate cache
+    await redis.del(redisKey);
+
+    // 2. Clear items in MongoDB
     const clearedCart = await Cart.findOneAndUpdate(
       { user: userId },
       { items: [], totalAmount: 0 },
       { returnDocument: 'after' }
     );
 
-    // Update Redis with empty cart
+    // 3. Update Redis with empty cart
     await redis.setex(redisKey, CART_TTL, JSON.stringify(clearedCart));
     
     return clearedCart;

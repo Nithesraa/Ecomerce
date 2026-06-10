@@ -82,5 +82,36 @@ export const productController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  approveProduct: async (req, res, next) => {
+    try {
+      const product = await productService.updateProduct(req.params.id, {
+        status: 'ACTIVE',
+        approvalInfo: {
+          approvedBy: req.user._id,
+          approvedAt: new Date()
+        }
+      }, req.user);
+      res.status(200).json({ success: true, message: 'Product approved', data: product });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  rejectProduct: async (req, res, next) => {
+    try {
+      const product = await productService.updateProduct(req.params.id, {
+        status: 'REJECTED',
+        approvalInfo: {
+          approvedBy: req.user._id,
+          approvedAt: new Date(),
+          rejectionReason: req.body.rejectionReason || 'Rejected by Admin'
+        }
+      }, req.user);
+      res.status(200).json({ success: true, message: 'Product rejected', data: product });
+    } catch (error) {
+      next(error);
+    }
   }
 };

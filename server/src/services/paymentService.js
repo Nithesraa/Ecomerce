@@ -36,17 +36,33 @@ export const paymentService = {
     try {
       const order = await Order.findById(orderId).session(session);
       if (!order) throw new Error('Order not found');
-      if (order.paymentStatus === 'PAID') throw new Error('Order is already paid');
+      
+      // Idempotency Fast-Path Check
+      if (order.paymentStatus === 'PAID') {
+        await session.abortTransaction();
+        session.endSession();
+        return { success: true, message: 'Already processed', orderId };
+      }
 
       // 3. Create Payment record
-      await Payment.create([{
-        order: orderId,
-        razorpayOrderId,
-        razorpayPaymentId,
-        amount: order.totalAmount,
-        paymentMethod,
-        status: 'SUCCESS'
-      }], { session });
+      try {
+        await Payment.create([{
+          order: orderId,
+          razorpayOrderId,
+          razorpayPaymentId,
+          amount: order.totalAmount,
+          paymentMethod,
+          status: 'SUCCESS'
+        }], { session });
+      } catch (err) {
+        if (err.code === 11000) {
+          // Idempotency: duplicate payment record for this order
+          await session.abortTransaction();
+          session.endSession();
+          return { success: true, message: 'Already processed', orderId };
+        }
+        throw err;
+      }
 
       // 4 & 5. Update Order status
       order.paymentStatus = 'PAID';
@@ -58,19 +74,22 @@ export const paymentService = {
       const orderItems = await OrderItem.find({ order: orderId }).session(session);
       
       for (const item of orderItems) {
-        const product = await Product.findById(item.product).session(session);
-        if (product) {
-          // Reduce stock securely (clamping to 0 if an oversell edge case bypassed earlier checks)
-          product.stock = Math.max(0, product.stock - item.quantity);
-          await product.save({ session });
+        const product = await Product.findOneAndUpdate(
+          { _id: item.product, stock: { $gte: item.quantity } },
+          { $inc: { stock: -item.quantity } },
+          { session, returnDocument: 'after' }
+        );
 
-          await InventoryLog.create([{
-            product: product._id,
-            seller: product.seller,
-            changeType: 'SOLD',
-            quantityChanged: -item.quantity
-          }], { session });
+        if (!product) {
+          throw new Error(`Product went out of stock during checkout: ${item.productTitle || item.product}`);
         }
+
+        await InventoryLog.create([{
+          product: product._id,
+          seller: product.seller,
+          changeType: 'SOLD',
+          quantityChanged: -item.quantity
+        }], { session });
       }
 
       // 8. Increment Coupon (Only after payment succeeds)

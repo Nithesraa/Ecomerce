@@ -1,14 +1,15 @@
 import express from 'express';
 import { wishlistController } from '../controllers/wishlistController.js';
 import { authenticate } from '../middlewares/authMiddleware.js';
+import { validateRequest } from '../middlewares/validateRequest.js';
+import { toggleWishlistSchema, removeFromWishlistSchema } from '../validators/ecommerceValidators.js';
 
 const router = express.Router();
 
-// Apply authentication middleware to all wishlist routes
 router.use(authenticate);
 
 router.get('/', wishlistController.getWishlist);
-router.post('/', wishlistController.addToWishlist);
-router.delete('/:productId', wishlistController.removeFromWishlist);
+router.post('/', validateRequest(toggleWishlistSchema), wishlistController.addToWishlist);
+router.delete('/:productId', validateRequest(removeFromWishlistSchema), wishlistController.removeFromWishlist);
 
 export default router;

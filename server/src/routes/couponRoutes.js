@@ -1,6 +1,8 @@
 import express from 'express';
 import { couponController } from '../controllers/couponController.js';
 import { authenticate, authorizeRoles } from '../middlewares/authMiddleware.js';
+import { validateRequest } from '../middlewares/validateRequest.js';
+import { createCouponSchema, updateCouponSchema, idParamSchema } from '../validators/ecommerceValidators.js';
 
 const router = express.Router();
 
@@ -8,10 +10,10 @@ const router = express.Router();
 router.use(authenticate);
 router.use(authorizeRoles('ADMIN'));
 
-router.post('/', couponController.create);
+router.post('/', validateRequest(createCouponSchema), couponController.create);
 router.get('/', couponController.getAll);
-router.get('/:id', couponController.getById);
-router.put('/:id', couponController.update);
-router.delete('/:id', couponController.delete);
+router.get('/:id', validateRequest(idParamSchema), couponController.getById);
+router.put('/:id', validateRequest(updateCouponSchema), couponController.update);
+router.delete('/:id', validateRequest(idParamSchema), couponController.delete);
 
 export default router;
