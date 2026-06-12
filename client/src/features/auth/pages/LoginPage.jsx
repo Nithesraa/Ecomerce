@@ -13,12 +13,27 @@ const loginSchema = z.object({
   password: z.string().min(6, 'Password must be at least 6 characters'),
 });
 
+const onSubmit = async (data) => {
+  try {
+    const user = await dispatch(loginUser(data)).unwrap();
+
+    console.log("LOGIN USER:", user);
+    console.log("LOCAL STORAGE:", localStorage.getItem("user"));
+
+    toast.success(`Welcome back, ${user.name}!`);
+    navigate(from, { replace: true });
+  } catch (error) {
+    console.error("LOGIN ERROR:", error);
+    toast.error(error || 'Failed to login');
+  }
+};
+
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { status } = useSelector((state) => state.auth);
-  
+
   const from = location.state?.from?.pathname || '/';
 
   const {
@@ -60,9 +75,8 @@ export const LoginPage = () => {
                 <input
                   type="email"
                   {...register('email')}
-                  className={`block w-full pl-10 pr-3 py-2 border ${
-                    errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  className={`block w-full pl-10 pr-3 py-2 border ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
+                    } rounded-md focus:outline-none sm:text-lg`}
                   placeholder="you@example.com"
                 />
               </div>
@@ -78,9 +92,8 @@ export const LoginPage = () => {
                 <input
                   type="password"
                   {...register('password')}
-                  className={`block w-full pl-10 pr-3 py-2 border ${
-                    errors.password ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  className={`block w-full pl-10 pr-3 py-2 border ${errors.password ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
+                    } rounded-md focus:outline-none sm:text-lg`}
                   placeholder="••••••••"
                 />
               </div>
