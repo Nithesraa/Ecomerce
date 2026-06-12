@@ -66,8 +66,11 @@ app.use('/api/admin/orders', adminOrderRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api', reviewRoutes);
 
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', message: 'ShopSphere API is running' });
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'ShopSphere API is running',
+  });
 });
 
 // 5. Global Error Handler
