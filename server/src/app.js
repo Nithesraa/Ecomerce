@@ -21,7 +21,6 @@ import analyticsRoutes from './routes/analyticsRoutes.js';
 
 const app = express();
 
-app.set('trust proxy', 1);
 // 1. Security Middlewares
 app.use(helmet());
 console.log("NODE_ENV =", process.env.NODE_ENV);
@@ -67,11 +66,8 @@ app.use('/api/admin/orders', adminOrderRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api', reviewRoutes);
 
-app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    status: 'ok',
-    message: 'ShopSphere API is running',
-  });
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'ShopSphere API is running' });
 });
 
 // 5. Global Error Handler
