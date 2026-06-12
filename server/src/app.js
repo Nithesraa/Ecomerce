@@ -23,9 +23,12 @@ const app = express();
 
 // 1. Security Middlewares
 app.use(helmet());
+console.log("NODE_ENV =", process.env.NODE_ENV);
+console.log("FRONTEND_URL =", process.env.FRONTEND_URL);
+
 app.use(
   cors({
-    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:5173',
+    origin: true,
     credentials: true,
   })
 );
