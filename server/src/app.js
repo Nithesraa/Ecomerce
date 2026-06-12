@@ -30,7 +30,23 @@ console.log("FRONTEND_URL =", process.env.FRONTEND_URL);
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || true,
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      
+      // Allow localhost, the exact FRONTEND_URL, and any Vercel preview deployment
+      if (
+        origin === process.env.FRONTEND_URL || 
+        origin.startsWith('http://localhost:') || 
+        origin.endsWith('.vercel.app')
+      ) {
+        return callback(null, true);
+      }
+      
+      // Otherwise fallback to true to prevent complete blockage during development
+      // Change to callback(new Error('Not allowed by CORS')) in strict production
+      callback(null, true);
+    },
     credentials: true,
   })
 );
