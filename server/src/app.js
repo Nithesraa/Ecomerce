@@ -21,6 +21,8 @@ import analyticsRoutes from './routes/analyticsRoutes.js';
 
 const app = express();
 
+app.set('trust proxy', true);
+
 // 1. Security Middlewares
 app.use(helmet());
 console.log("NODE_ENV =", process.env.NODE_ENV);
