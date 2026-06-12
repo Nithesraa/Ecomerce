@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema(
       country: { type: String, required: true },
       zipCode: { type: String, required: true },
     },
-    orderStatus: { type: String, enum: ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'], default: 'PENDING' },
+    orderStatus: { type: String, enum: ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURN_REQUESTED', 'RETURNED'], default: 'PENDING' },
     statusHistory: [statusHistorySchema],
     paymentStatus: { type: String, enum: ['PENDING', 'PAID', 'FAILED', 'REFUNDED'], default: 'PENDING' },
   },

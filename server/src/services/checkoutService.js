@@ -29,7 +29,7 @@ export const checkoutService = {
       
       if (rawItem && rawItem.quantity !== validItem.quantity) {
         throw Object.assign(
-          new Error(`Stock limited for ${validItem.productDetails.title}. Quantity adjusted to ${validItem.quantity}. Please review your cart.`),
+          new Error(`Stock limited for ${validItem.product.title}. Quantity adjusted to ${validItem.quantity}. Please review your cart.`),
           { statusCode: 400 }
         );
       }
@@ -50,7 +50,9 @@ export const checkoutService = {
     // 8. Generate checkout summary
     return {
       subtotal,
-      discountAmount,
+      discount: discountAmount,
+      shipping: 0,
+      tax: 0,
       finalTotal,
       items: cart.items
     };

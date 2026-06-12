@@ -11,10 +11,13 @@ import cartRoutes from './routes/cartRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
 import checkoutRoutes from './routes/checkoutRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 import couponRoutes from './routes/couponRoutes.js';
 import webhookRoutes from './routes/webhookRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import adminOrderRoutes from './routes/adminOrderRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
 
 const app = express();
 
@@ -22,7 +25,7 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: '*', // We will configure this properly for production later
+    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : 'http://localhost:5173',
     credentials: true,
   })
 );
@@ -47,7 +50,7 @@ app.use(
 
 // 4. API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
+app.use('/api/products', productRoutes); // Note: The route /api/products/:productId/reviews is handled by reviewRoutes but mounted at /api generally? No!
 app.use('/api/categories', categoryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
@@ -57,6 +60,8 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/coupons', couponRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/admin/orders', adminOrderRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api', reviewRoutes);
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'ShopSphere API is running' });

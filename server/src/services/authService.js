@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs';
 import { userRepository } from '../repositories/userRepository.js';
+import { SellerProfile } from '../models/SellerProfile.js';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt.js';
+import { sendWelcomeEmail } from './emailService.js';
 
 export const authService = {
   register: async ({ name, email, password, role }) => {
@@ -13,6 +15,20 @@ export const authService = {
 
     const user = await userRepository.create({ name, email, password, role });
     
+    if (user.role === 'SELLER') {
+      await SellerProfile.create({
+        user: user._id,
+        storeName: name, // Default to using their company name
+        businessEmail: email,
+        isVerified: false
+      });
+    }
+
+    // Fire and forget welcome email
+    sendWelcomeEmail(user.email, user.name, user.role).catch(err => {
+      console.error('Failed to send welcome email in background', err);
+    });
+
     return {
       id: user._id,
       name: user.name,
@@ -48,6 +64,15 @@ export const authService = {
       user.loginAttempts = 0;
       user.lockUntil = undefined;
       await user.save();
+    }
+
+    if (user.role === 'SELLER') {
+      const sellerProfile = await SellerProfile.findOne({ user: user._id });
+      if (!sellerProfile || !sellerProfile.isVerified) {
+        const error = new Error('Your seller account is pending admin verification.');
+        error.statusCode = 403;
+        throw error;
+      }
     }
 
     const accessToken = generateAccessToken(user._id, user.role);

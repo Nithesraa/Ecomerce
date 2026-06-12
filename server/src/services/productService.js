@@ -1,5 +1,6 @@
 import cloudinary from '../config/cloudinary.js';
 import { productRepository } from '../repositories/productRepository.js';
+import mongoose from 'mongoose';
 
 const uploadImageToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
@@ -34,10 +35,14 @@ export const productService = {
 
     // Generate slug from title
     const slug = productData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now();
+    
+    // Generate sku if not provided
+    const sku = productData.sku || `SKU-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
     const data = {
       ...productData,
       slug,
+      sku,
       seller: sellerId,
       images,
       status: 'PENDING_APPROVAL', // Default for new products
@@ -52,6 +57,10 @@ export const productService = {
       filters.status = 'ACTIVE';
     }
     delete filters.showAllStatus;
+
+    if (filters.category && !mongoose.Types.ObjectId.isValid(filters.category)) {
+      return { products: [], total: 0 };
+    }
 
     return productRepository.findProducts(filters, options);
   },
@@ -72,8 +81,8 @@ export const productService = {
     if (!product) throw Object.assign(new Error('Product not found'), { statusCode: 404 });
 
     // Ownership Validation
-    const sellerId = product.seller.user ? product.seller.user.toString() : product.seller.toString();
-    if (sellerId !== user._id.toString() && user.role !== 'ADMIN') {
+    const sellerProfileId = product.seller._id ? product.seller._id.toString() : product.seller.toString();
+    if (sellerProfileId !== user.sellerProfileId?.toString() && user.role !== 'ADMIN') {
       throw Object.assign(new Error('Forbidden: You do not own this product'), { statusCode: 403 });
     }
 
@@ -85,8 +94,8 @@ export const productService = {
     if (!product) throw Object.assign(new Error('Product not found'), { statusCode: 404 });
 
     // Ownership Validation
-    const sellerId = product.seller.user ? product.seller.user.toString() : product.seller.toString();
-    if (sellerId !== user._id.toString() && user.role !== 'ADMIN') {
+    const sellerProfileId = product.seller._id ? product.seller._id.toString() : product.seller.toString();
+    if (sellerProfileId !== user.sellerProfileId?.toString() && user.role !== 'ADMIN') {
       throw Object.assign(new Error('Forbidden: You do not own this product'), { statusCode: 403 });
     }
 

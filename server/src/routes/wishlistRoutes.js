@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(authenticate);
 
 router.get('/', wishlistController.getWishlist);
-router.post('/', validateRequest(toggleWishlistSchema), wishlistController.addToWishlist);
+router.post('/', validateRequest(toggleWishlistSchema), wishlistController.toggleWishlist);
 router.delete('/:productId', validateRequest(removeFromWishlistSchema), wishlistController.removeFromWishlist);
 
 export default router;

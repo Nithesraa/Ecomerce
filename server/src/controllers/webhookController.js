@@ -1,77 +1,55 @@
-import { razorpayService } from '../services/razorpayService.js';
+import { stripeService } from '../services/stripeService.js';
 import { paymentService } from '../services/paymentService.js';
 import logger from '../utils/logger.js';
 
 export const webhookController = {
-  handleRazorpayWebhook: async (req, res, next) => {
+  handleStripeWebhook: async (req, res, next) => {
     try {
-      const signature = req.headers['x-razorpay-signature'];
+      const signature = req.headers['stripe-signature'];
       
       // req.body should be a Buffer because we use express.raw() for this route
-      const rawBody = req.body.toString('utf8');
+      const rawBody = req.body;
 
-      const isValid = razorpayService.verifyWebhookSignature(rawBody, signature);
-      if (!isValid) {
-        logger.warn('Invalid Razorpay webhook signature');
-        return res.status(400).json({ success: false, message: 'Invalid signature' });
+      let event;
+      try {
+        event = stripeService.verifySignature(rawBody, signature);
+      } catch (err) {
+        logger.warn(`Invalid Stripe webhook signature: ${err.message}`);
+        return res.status(400).send(`Webhook Error: ${err.message}`);
       }
 
-      const event = JSON.parse(rawBody);
-
-      switch (event.event) {
-        case 'payment.captured': {
-          const payment = event.payload.payment.entity;
-          const orderId = payment.notes?.orderId;
-          const razorpayOrderId = payment.order_id;
-          const razorpayPaymentId = payment.id;
-
-          if (!orderId) {
-            logger.error(`Webhook error: Missing orderId in notes for payment ${razorpayPaymentId}`);
-            return res.status(400).json({ success: false, message: 'Missing orderId' });
+      switch (event.type) {
+        case 'checkout.session.completed': {
+          const session = event.data.object;
+          if (session.payment_status === 'paid') {
+            await paymentService.processSuccessfulPayment(session);
+            logger.info(`Stripe webhook successfully processed checkout.session.completed for order ${session.metadata.orderId}`);
           }
-
-          // Generate dummy signature since we've already cryptographically verified the webhook itself
-          // We can bypass standard signature check by passing "mock_signature" in test mode, 
-          // but in production, paymentService.processSuccessfulPayment checks standard signature.
-          // Wait, paymentService.processSuccessfulPayment checks signature!
-          // If we pass the WEBHOOK signature, it will fail verifySignature (which expects order_id|payment_id).
-          // We should add a flag or a separate service method, or just let paymentService know it's a verified webhook.
-          
-          await paymentService.processSuccessfulPayment(
-            orderId, 
-            razorpayOrderId, 
-            razorpayPaymentId, 
-            'webhook_verified' // Special signature override
-          );
-          logger.info(`Webhook successfully processed payment.captured for order ${orderId}`);
           break;
         }
-        case 'payment.failed': {
-          const payment = event.payload.payment.entity;
-          const orderId = payment.notes?.orderId;
-          const razorpayOrderId = payment.order_id;
-          const razorpayPaymentId = payment.id;
-          const errorReason = payment.error_description || payment.error_reason;
-
-          if (orderId) {
-            await paymentService.processFailedPayment(orderId, razorpayOrderId, razorpayPaymentId, errorReason);
-            logger.info(`Webhook successfully processed payment.failed for order ${orderId}`);
-          }
+        case 'checkout.session.expired': {
+          const session = event.data.object;
+          await paymentService.processFailedPayment(session, 'EXPIRED', 'Checkout session expired');
+          logger.info(`Stripe webhook successfully processed checkout.session.expired for order ${session.metadata?.orderId}`);
+          break;
+        }
+        case 'payment_intent.payment_failed': {
+          // Sometimes checkout.session handles everything, but if a payment fails explicitly
+          // We can't always link payment_intent directly to order easily without expanding or fetching session
+          // However, we mainly rely on checkout.session.expired for hosted checkout drops.
+          // We will log this for completeness.
+          logger.warn(`Stripe payment_intent.payment_failed received: ${event.data.object.id}`);
           break;
         }
         default:
-          logger.info(`Unhandled Razorpay webhook event: ${event.event}`);
+          logger.info(`Unhandled Stripe webhook event: ${event.type}`);
       }
 
-      // Always return 200 to acknowledge receipt and prevent Razorpay retries
-      res.status(200).json({ success: true });
+      // Always return 200 to acknowledge receipt
+      res.status(200).json({ received: true });
     } catch (error) {
-      // paymentService gracefully returns already processed without throwing,
-      // so if it throws, it's a real issue.
       logger.error(`Webhook processing error: ${error.message}`, { stack: error.stack });
-      // If it's a duplicate or race condition handled gracefully, it won't throw.
-      // We return 500 so Razorpay retries it, unless we want to swallow it. Let's send 500 for real errors.
-      res.status(500).json({ success: false, message: 'Internal server error during webhook processing' });
+      res.status(500).send(`Webhook Error: Internal server error`);
     }
   }
 };

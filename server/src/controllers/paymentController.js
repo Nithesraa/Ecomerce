@@ -1,11 +1,12 @@
 import { paymentService } from '../services/paymentService.js';
+import { stripeService } from '../services/stripeService.js';
+import { stripe } from '../services/stripeService.js'; // need to access stripe directly for getSession
 
 export const paymentController = {
   /**
-   * Initializes a Razorpay order for a given system Order ID.
+   * Initializes a Stripe Checkout Session for a given system Order ID.
    * 
    * @param {Object} req - Express request object
-   * @param {Object} req.body - Contains orderId
    * @param {Object} res - Express response object
    * @param {Function} next - Express next middleware function
    */
@@ -16,81 +17,46 @@ export const paymentController = {
         throw Object.assign(new Error('Order ID is required'), { statusCode: 400 });
       }
 
-      const paymentData = await paymentService.initializePayment(orderId);
+      const paymentData = await paymentService.createStripeCheckoutSession(orderId, req.user);
 
       res.status(200).json({
         success: true,
-        message: 'Payment initialized successfully',
+        message: 'Stripe Checkout Session created successfully',
         data: paymentData
       });
     } catch (error) {
-      next(error); // Passes to centralized error handler
+      next(error);
     }
   },
 
   /**
-   * Verifies a successful Razorpay payment signature and completes the order flow.
+   * Retrieves a Stripe Checkout Session to check its status.
+   * Useful for the order-success page to validate the payment.
    * 
    * @param {Object} req - Express request object
-   * @param {Object} req.body - Contains orderId, razorpayOrderId, razorpayPaymentId, signature
    * @param {Object} res - Express response object
    * @param {Function} next - Express next middleware function
    */
-  verify: async (req, res, next) => {
+  getSession: async (req, res, next) => {
     try {
-      const { orderId, razorpayOrderId, razorpayPaymentId, signature } = req.body;
-
-      if (!orderId || !razorpayOrderId || !razorpayPaymentId || !signature) {
-         throw Object.assign(new Error('Missing required payment verification parameters'), { statusCode: 400 });
+      const { sessionId } = req.params;
+      if (!sessionId) {
+        throw Object.assign(new Error('Session ID is required'), { statusCode: 400 });
       }
 
-      const result = await paymentService.processSuccessfulPayment(
-        orderId, 
-        razorpayOrderId, 
-        razorpayPaymentId, 
-        signature
-      );
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
 
       res.status(200).json({
         success: true,
-        message: 'Payment verified successfully. Order is now processing.',
-        data: result
+        data: {
+          id: session.id,
+          payment_status: session.payment_status,
+          status: session.status,
+          metadata: session.metadata
+        }
       });
     } catch (error) {
-      next(error); // Passes to centralized error handler
-    }
-  },
-
-  /**
-   * Processes a failed payment from the client-side Razorpay modal.
-   * 
-   * @param {Object} req - Express request object
-   * @param {Object} req.body - Contains orderId, razorpayOrderId, razorpayPaymentId, errorReason
-   * @param {Object} res - Express response object
-   * @param {Function} next - Express next middleware function
-   */
-  fail: async (req, res, next) => {
-    try {
-      const { orderId, razorpayOrderId, razorpayPaymentId, errorReason } = req.body;
-
-      if (!orderId) {
-        throw Object.assign(new Error('Order ID is required'), { statusCode: 400 });
-      }
-
-      const result = await paymentService.processFailedPayment(
-        orderId, 
-        razorpayOrderId, 
-        razorpayPaymentId, 
-        errorReason
-      );
-
-      res.status(200).json({
-        success: true,
-        message: 'Payment failure logged successfully',
-        data: result
-      });
-    } catch (error) {
-      next(error); // Passes to centralized error handler
+      next(error);
     }
   }
 };

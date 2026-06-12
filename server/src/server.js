@@ -5,6 +5,7 @@ import { connectDatabase } from './config/database.js';
 import { connectRedis } from './config/redis.js';
 import logger from './utils/logger.js';
 import { initSocket } from './socket/index.js';
+import { startCartRecoveryJob } from './jobs/cartRecoveryJob.js';
 
 const startServer = async () => {
   try {
@@ -19,6 +20,9 @@ const startServer = async () => {
     
     // 4. Initialize Socket.IO
     initSocket(server);
+
+    // Start background jobs
+    startCartRecoveryJob();
 
     server.listen(env.PORT, () => {
       logger.info(`🚀 Server running in ${env.NODE_ENV} mode on port ${env.PORT}`);

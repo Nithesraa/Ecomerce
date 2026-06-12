@@ -1,37 +1,37 @@
 import mongoose from 'mongoose';
-import { razorpayService } from './razorpayService.js';
+import { stripeService } from './stripeService.js';
 import { Payment } from '../models/Payment.js';
 import { Order } from '../models/Order.js';
 import { OrderItem } from '../models/OrderItem.js';
 import { Product } from '../models/Product.js';
 import { InventoryLog } from '../models/InventoryLog.js';
 import { Coupon } from '../models/Coupon.js';
+import { User } from '../models/User.js';
 import { eventBus } from '../utils/eventBus.js';
+import { sendOrderConfirmationEmail } from './emailService.js';
 
 export const paymentService = {
-  initializePayment: async (orderId) => {
+  createStripeCheckoutSession: async (orderId, user) => {
     const order = await Order.findById(orderId);
     if (!order) throw Object.assign(new Error('Order not found'), { statusCode: 404 });
     if (order.paymentStatus === 'PAID') throw Object.assign(new Error('Order is already paid'), { statusCode: 400 });
 
-    const razorpayOrder = await razorpayService.createRazorpayOrder(order.totalAmount, orderId);
+    const orderItems = await OrderItem.find({ order: orderId });
+    
+    const session = await stripeService.createCheckoutSession(order, orderItems, user.email);
     
     return {
-      razorpayOrderId: razorpayOrder.id,
-      amount: razorpayOrder.amount,
-      currency: razorpayOrder.currency,
+      checkoutUrl: session.url,
+      sessionId: session.id,
       orderId: order._id
     };
   },
 
-  processSuccessfulPayment: async (orderId, razorpayOrderId, razorpayPaymentId, signature, paymentMethod = 'RAZORPAY') => {
-    // 2. Verify signature
-    if (signature !== 'webhook_verified') {
-      const isValid = razorpayService.verifySignature(razorpayOrderId, razorpayPaymentId, signature);
-      if (!isValid) {
-        throw Object.assign(new Error('Invalid payment signature'), { statusCode: 400 });
-      }
-    }
+  processSuccessfulPayment: async (stripeSession) => {
+    const orderId = stripeSession.metadata.orderId;
+    const stripeSessionId = stripeSession.id;
+    const stripePaymentIntentId = stripeSession.payment_intent;
+    const amountTotal = stripeSession.amount_total; // in cents
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -47,14 +47,19 @@ export const paymentService = {
         return { success: true, message: 'Already processed', orderId };
       }
 
+      // Verify Amount
+      if (Math.round(order.totalAmount * 100) !== amountTotal) {
+        throw new Error(`Amount mismatch: Order ${order.totalAmount} != Stripe ${amountTotal / 100}`);
+      }
+
       // 3. Create Payment record
       try {
         await Payment.create([{
           order: orderId,
-          razorpayOrderId,
-          razorpayPaymentId,
+          stripeSessionId,
+          stripePaymentIntentId,
           amount: order.totalAmount,
-          paymentMethod,
+          paymentMethod: 'STRIPE',
           status: 'SUCCESS'
         }], { session });
       } catch (err) {
@@ -70,7 +75,7 @@ export const paymentService = {
       // 4 & 5. Update Order status
       order.paymentStatus = 'PAID';
       order.orderStatus = 'PROCESSING';
-      order.statusHistory.push({ status: 'PROCESSING', note: 'Payment verified successfully.' });
+      order.statusHistory.push({ status: 'PROCESSING', note: 'Payment verified via Stripe webhook.' });
       await order.save({ session });
 
       // 6 & 7. Reduce Inventory & Log 
@@ -123,6 +128,12 @@ export const paymentService = {
       eventBus.emit('order.created', { orderId, userId: order.user, totalAmount: order.totalAmount });
       eventsToEmit.forEach(e => eventBus.emit(e.event, e.payload));
 
+      // Send Email Notification
+      const userDoc = await User.findById(order.user).select('email');
+      if (userDoc) {
+        sendOrderConfirmationEmail(userDoc.email, order).catch(err => console.error(err));
+      }
+
       return { success: true, orderId };
     } catch (error) {
       await session.abortTransaction();
@@ -131,7 +142,10 @@ export const paymentService = {
     }
   },
 
-  processFailedPayment: async (orderId, razorpayOrderId, razorpayPaymentId, errorReason) => {
+  processFailedPayment: async (stripeSession, status = 'FAILED', reason = 'Payment failed') => {
+    const orderId = stripeSession.metadata?.orderId;
+    if (!orderId) throw new Error('Order ID missing from metadata');
+
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -139,19 +153,24 @@ export const paymentService = {
       const order = await Order.findById(orderId).session(session);
       if (!order) throw new Error('Order not found');
 
+      if (order.paymentStatus === 'PAID') {
+        await session.abortTransaction();
+        session.endSession();
+        return { success: true, message: 'Already processed successfully', orderId };
+      }
+
       // 3. Create Failed Payment Record
       await Payment.create([{
         order: orderId,
-        razorpayOrderId,
-        razorpayPaymentId,
+        stripeSessionId: stripeSession.id,
         amount: order.totalAmount,
-        paymentMethod: 'RAZORPAY',
-        status: 'FAILED'
+        paymentMethod: 'STRIPE',
+        status: status === 'EXPIRED' ? 'EXPIRED' : 'FAILED'
       }], { session });
 
       // 4 & 5. Update Order Status
-      order.paymentStatus = 'FAILED';
-      order.statusHistory.push({ status: 'PENDING', note: `Payment failed: ${errorReason || 'User dropped from checkout'}` });
+      order.paymentStatus = status; // FAILED or EXPIRED
+      order.statusHistory.push({ status: 'PENDING', note: `Stripe webhook received: ${reason}` });
       await order.save({ session });
 
       // Inventory and Coupons are strictly NOT touched for failed payments.
@@ -159,12 +178,67 @@ export const paymentService = {
       await session.commitTransaction();
       session.endSession();
       
-      eventBus.emit('payment.failed', { orderId, userId: order.user, reason: errorReason });
+      eventBus.emit('payment.failed', { orderId, userId: order.user, reason });
 
       return { success: false, orderId };
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
+      throw error;
+    }
+  },
+
+  processRefund: async (orderId, sessionParams = null) => {
+    let session = sessionParams;
+    let ownSession = false;
+    if (!session) {
+      session = await mongoose.startSession();
+      session.startTransaction();
+      ownSession = true;
+    }
+
+    try {
+      const order = await Order.findById(orderId).session(session);
+      if (!order) throw new Error('Order not found');
+
+      if (order.paymentStatus !== 'PAID') {
+        throw new Error('Can only refund paid orders');
+      }
+
+      const payment = await Payment.findOne({ order: orderId, status: 'SUCCESS' }).session(session);
+      
+      if (payment && payment.paymentMethod === 'STRIPE' && payment.stripePaymentIntentId) {
+        try {
+          // Process actual Stripe refund
+          await stripeService.refundPayment(payment.stripePaymentIntentId);
+          payment.status = 'REFUNDED';
+          await payment.save({ session });
+        } catch (stripeErr) {
+          console.error(`Stripe refund failed for order ${orderId}:`, stripeErr);
+          // If refund fails (e.g. insufficient funds in test mode), throw to abort
+          throw new Error('Stripe refund failed: ' + stripeErr.message);
+        }
+      } else if (payment && payment.paymentMethod === 'COD') {
+         // COD "refund" means we just cancel it out. No API call needed.
+         payment.status = 'REFUNDED';
+         await payment.save({ session });
+      }
+
+      order.paymentStatus = 'REFUNDED';
+      order.statusHistory.push({ status: order.orderStatus, note: 'Payment refunded' });
+      await order.save({ session });
+
+      if (ownSession) {
+        await session.commitTransaction();
+        session.endSession();
+      }
+
+      return { success: true };
+    } catch (error) {
+      if (ownSession) {
+        await session.abortTransaction();
+        session.endSession();
+      }
       throw error;
     }
   }

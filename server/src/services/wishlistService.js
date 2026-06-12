@@ -15,7 +15,7 @@ export const wishlistService = {
     return { user: userId, items: products };
   },
 
-  addToWishlist: async (userId, productId) => {
+  toggleWishlist: async (userId, productId) => {
     // 1. Validate Product
     const product = await Product.findById(productId);
     if (!product) throw Object.assign(new Error('Product not found'), { statusCode: 404 });
@@ -25,13 +25,14 @@ export const wishlistService = {
 
     const rawWishlist = await wishlistRepository.getWishlist(userId);
     
-    // 2. Prevent Duplicates
+    // 2. Toggle Logic
     const alreadyExists = rawWishlist.items.some(id => id.toString() === productId);
     if (alreadyExists) {
-      throw Object.assign(new Error('Product is already in wishlist'), { statusCode: 400 });
+      rawWishlist.items = rawWishlist.items.filter(id => id.toString() !== productId);
+    } else {
+      rawWishlist.items.push(productId);
     }
 
-    rawWishlist.items.push(productId);
     await wishlistRepository.saveWishlist(userId, { items: rawWishlist.items });
 
     return wishlistService.getWishlist(userId);

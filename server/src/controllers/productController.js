@@ -3,9 +3,7 @@ import { productService } from '../services/productService.js';
 export const productController = {
   createProduct: async (req, res, next) => {
     try {
-      // In a real app, seller id might come from req.user.sellerProfile
-      // const sellerId = req.body.seller; 
-      const sellerId = req.user._id;
+      const sellerId = req.user.sellerProfileId;
       const product = await productService.createProduct(req.body, sellerId, req.files);
       res.status(201).json({ success: true, data: product });
     } catch (error) {
@@ -20,6 +18,7 @@ export const productController = {
       const filters = {};
       if (search) filters.search = search;
       if (category) filters.category = category;
+      if (req.query.isFeatured) filters.isFeatured = req.query.isFeatured === 'true';
       if (minPrice || maxPrice) {
         filters.price = {};
         if (minPrice) filters.price.$gte = Number(minPrice);
@@ -50,16 +49,20 @@ export const productController = {
 
   getSellerProducts: async (req, res, next) => {
     try {
-      // Fallback logic for finding the seller ID
-      const sellerId = req.user.sellerProfileId || req.user._id;
-
       const { page = 1, limit = 10 } = req.query;
       const options = {
         skip: (Number(page) - 1) * Number(limit),
         limit: Number(limit),
       };
 
-      const result = await productService.getSellerProducts(sellerId, options);
+      let result;
+      if (req.user.role === 'ADMIN') {
+        result = await productService.getProducts({ showAllStatus: true }, options);
+      } else {
+        const sellerId = req.user.sellerProfileId || req.user._id;
+        result = await productService.getSellerProducts(sellerId, options);
+      }
+
       res.status(200).json({ success: true, data: result.products, total: result.total });
     } catch (error) {
       next(error);

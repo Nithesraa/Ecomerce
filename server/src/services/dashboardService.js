@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { OrderItem } from '../models/OrderItem.js';
 import { Product } from '../models/Product.js';
+import { SellerProfile } from '../models/SellerProfile.js';
 
 export const dashboardService = {
   getSellerOverview: async (sellerId) => {
@@ -46,5 +47,23 @@ export const dashboardService = {
       activeProducts: productMetrics?.activeProducts || 0,
       lowStockProducts: productMetrics?.lowStockProducts || 0
     };
+  },
+
+  getSellers: async () => {
+    return await SellerProfile.find().populate('user', 'name email createdAt');
+  },
+
+  verifySeller: async (sellerId, isVerified) => {
+    const seller = await SellerProfile.findByIdAndUpdate(
+      sellerId,
+      { isVerified },
+      { new: true }
+    );
+    if (!seller) {
+      const error = new Error('Seller not found');
+      error.statusCode = 404;
+      throw error;
+    }
+    return seller;
   }
 };

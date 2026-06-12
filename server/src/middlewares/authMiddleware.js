@@ -1,5 +1,6 @@
 import { verifyAccessToken } from '../utils/jwt.js';
 import { userRepository } from '../repositories/userRepository.js';
+import { SellerProfile } from '../models/SellerProfile.js';
 
 export const authenticate = async (req, res, next) => {
   try {
@@ -20,6 +21,15 @@ export const authenticate = async (req, res, next) => {
     }
 
     req.user = user;
+
+    if (user.role === 'SELLER') {
+      const sellerProfile = await SellerProfile.findOne({ user: user._id });
+      if (sellerProfile) {
+        req.user.sellerProfileId = sellerProfile._id;
+        req.user.isVerifiedSeller = sellerProfile.isVerified;
+      }
+    }
+
     next();
   } catch (error) {
     res.status(401).json({ success: false, message: 'Not authorized, token failed' });

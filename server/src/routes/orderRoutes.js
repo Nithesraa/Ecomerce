@@ -11,6 +11,9 @@ router.use(authenticate);
 // Create a new order
 router.post('/', validateRequest(createOrderSchema), orderController.createOrder);
 
+// Admin Routes
+router.get('/', authorizeRoles('ADMIN'), orderController.getAllOrders);
+
 // Customer Routes
 router.get('/my-orders', orderController.getMyOrders);
 

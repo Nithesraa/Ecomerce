@@ -50,17 +50,13 @@ const hydrateAndCalculateTotal = async (cartItems) => {
       });
 
       itemsForFrontend.push({
-        product: product._id,
-        productDetails: {
-          title: product.title,
-          slug: product.slug,
-          image: product.images[0]?.url,
-          price,
-          stock,
-        },
+        product: product,
         variantId: item.variantId,
         quantity: validQuantity,
       });
+      
+      // Calculate frontend item price
+      itemsForFrontend[itemsForFrontend.length - 1].price = price;
 
       totalAmount += price * validQuantity;
     }
@@ -117,7 +113,7 @@ export const cartService = {
     }
 
     const { itemsForDb, itemsForFrontend, totalAmount } = await hydrateAndCalculateTotal(newItems);
-    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount });
+    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount, recoveryEmailSentAt: null });
     
     return { user: userId, items: itemsForFrontend, totalAmount };
   },
@@ -155,7 +151,7 @@ export const cartService = {
     }
 
     const { itemsForDb, itemsForFrontend, totalAmount } = await hydrateAndCalculateTotal(newItems);
-    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount });
+    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount, recoveryEmailSentAt: null });
     
     return { user: userId, items: itemsForFrontend, totalAmount };
   },
@@ -168,7 +164,7 @@ export const cartService = {
     );
 
     const { itemsForDb, itemsForFrontend, totalAmount } = await hydrateAndCalculateTotal(newItems);
-    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount });
+    await cartRepository.saveCart(userId, { items: itemsForDb, totalAmount, recoveryEmailSentAt: null });
     
     return { user: userId, items: itemsForFrontend, totalAmount };
   },

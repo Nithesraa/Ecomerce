@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { Order } from '../models/Order.js';
 import { OrderItem } from '../models/OrderItem.js';
+import { Product } from '../models/Product.js';
 
 export const orderRepository = {
   createOrderWithItems: async (orderData, orderItemsData) => {
@@ -9,19 +10,32 @@ export const orderRepository = {
     session.startTransaction();
     
     try {
-      // 1. Create the master order record
+      // 1. Atomically decrement stock for all items
+      for (const item of orderItemsData) {
+        const updatedProduct = await Product.findOneAndUpdate(
+          { _id: item.product, stock: { $gte: item.quantity } },
+          { $inc: { stock: -item.quantity } },
+          { session, new: true }
+        );
+
+        if (!updatedProduct) {
+          throw new Error(`Insufficient stock or product not found for ID: ${item.product}`);
+        }
+      }
+
+      // 2. Create the master order record
       const [order] = await Order.create([orderData], { session });
       
-      // 2. Attach the generated Order ID to every OrderItem snapshot
+      // 3. Attach the generated Order ID to every OrderItem snapshot
       const itemsWithOrderId = orderItemsData.map(item => ({
         ...item,
         order: order._id
       }));
       
-      // 3. Bulk insert the OrderItems
+      // 4. Bulk insert the OrderItems
       const orderItems = await OrderItem.insertMany(itemsWithOrderId, { session });
       
-      // 4. Commit if everything succeeds
+      // 5. Commit if everything succeeds
       await session.commitTransaction();
       session.endSession();
       

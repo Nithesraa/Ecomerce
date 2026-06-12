@@ -8,7 +8,7 @@ const orderItemSchema = new mongoose.Schema(
     seller: { type: mongoose.Schema.Types.ObjectId, ref: 'SellerProfile', required: true, index: true },
     quantity: { type: Number, required: true, min: 1 },
     priceAtPurchase: { type: Number, required: true },
-    fulfillmentStatus: { type: String, enum: ['PENDING', 'PACKED', 'SHIPPED', 'DELIVERED'], default: 'PENDING' },
+    fulfillmentStatus: { type: String, enum: ['PENDING', 'PACKED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURN_REQUESTED', 'RETURNED'], default: 'PENDING' },
   },
   { timestamps: true }
 );

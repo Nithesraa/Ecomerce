@@ -10,10 +10,10 @@ export const wishlistController = {
     }
   },
 
-  addToWishlist: async (req, res, next) => {
+  toggleWishlist: async (req, res, next) => {
     try {
       const { productId } = req.body;
-      const wishlist = await wishlistService.addToWishlist(req.user._id, productId);
+      const wishlist = await wishlistService.toggleWishlist(req.user._id, productId);
       res.status(200).json({ success: true, data: wishlist });
     } catch (error) {
       next(error);

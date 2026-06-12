@@ -16,9 +16,9 @@ const envSchema = z.object({
   CLOUDINARY_CLOUD_NAME: z.string(),
   CLOUDINARY_API_KEY: z.string(),
   CLOUDINARY_API_SECRET: z.string(),
-  RAZORPAY_KEY_ID: z.string().optional(),
-  RAZORPAY_KEY_SECRET: z.string().optional(),
-  RAZORPAY_WEBHOOK_SECRET: z.string().optional(),
+  STRIPE_SECRET_KEY: z.string().min(1, "STRIPE_SECRET_KEY is missing"),
+  STRIPE_WEBHOOK_SECRET: z.string().min(1, "STRIPE_WEBHOOK_SECRET is missing"),
+  FRONTEND_URL: z.string().url("FRONTEND_URL must be a valid URL"),
 });
 
 // Validate the environment variables

@@ -12,13 +12,13 @@ export const orderController = {
    */
   createOrder: async (req, res, next) => {
     try {
-      const { shippingAddress, couponCode } = req.body;
+      const { shippingAddress, couponCode, paymentMethod } = req.body;
       
       if (!shippingAddress) {
         throw Object.assign(new Error('Shipping address is required'), { statusCode: 400 });
       }
 
-      const { order, orderItems } = await orderService.createOrder(req.user._id, shippingAddress, couponCode);
+      const { order, orderItems } = await orderService.createOrder(req.user._id, shippingAddress, couponCode, paymentMethod);
       
       res.status(201).json({
         success: true,

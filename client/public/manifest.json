@@ -1,0 +1,17 @@
+{
+  "name": "ShopSphere",
+  "short_name": "ShopSphere",
+  "description": "Premium E-commerce Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

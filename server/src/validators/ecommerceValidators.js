@@ -64,32 +64,42 @@ export const createOrderSchema = z.object({
       country: z.string().min(1, 'Country is required'),
       zipCode: z.string().min(1, 'ZipCode is required')
     }).strict(),
-    couponCode: z.string().trim().toUpperCase().optional()
+    couponCode: z.string().trim().toUpperCase().optional(),
+    paymentMethod: z.enum(['STRIPE', 'COD']).default('STRIPE')
   }).strict()
 });
 
 // --- Payment ---
+export const couponUsageSchema = z.object({
+  body: z.object({
+    userId: objectIdSchema
+  }).strict()
+});
+
+// --- Reviews ---
+export const createReviewSchema = z.object({
+  params: z.object({
+    productId: objectIdSchema
+  }),
+  body: z.object({
+    rating: z.number().int().min(1, 'Rating must be at least 1').max(5, 'Rating cannot exceed 5'),
+    comment: z.string().max(1000, 'Comment is too long').optional()
+  }).strict()
+});
+
+export const updateReviewSchema = z.object({
+  params: z.object({
+    reviewId: objectIdSchema
+  }),
+  body: z.object({
+    rating: z.number().int().min(1).max(5).optional(),
+    comment: z.string().max(1000).optional()
+  }).strict()
+});
+
 export const paymentInitSchema = z.object({
   body: z.object({
     orderId: objectIdSchema
-  }).strict()
-});
-
-export const paymentVerifySchema = z.object({
-  body: z.object({
-    orderId: objectIdSchema,
-    razorpayOrderId: z.string().min(1),
-    razorpayPaymentId: z.string().min(1),
-    signature: z.string().min(1)
-  }).strict()
-});
-
-export const paymentFailSchema = z.object({
-  body: z.object({
-    orderId: objectIdSchema,
-    razorpayOrderId: z.string().min(1),
-    razorpayPaymentId: z.string().min(1),
-    errorReason: z.string().optional()
   }).strict()
 });
 
@@ -144,10 +154,12 @@ export const createProductSchema = z.object({
   body: z.object({
     title: z.string().min(3),
     description: z.string().min(10),
-    price: z.number().positive(),
+    price: z.coerce.number().positive(),
     category: objectIdSchema,
-    stock: z.number().int().nonnegative().default(0),
-    tags: z.array(z.string()).optional()
+    stock: z.coerce.number().int().nonnegative().default(0),
+    tags: z.array(z.string()).optional(),
+    status: z.enum(['DRAFT', 'PENDING_APPROVAL', 'ACTIVE', 'REJECTED', 'ARCHIVED']).optional(),
+    discountPercentage: z.coerce.number().min(0).max(100).optional()
   }).passthrough()
 });
 
@@ -156,9 +168,10 @@ export const updateProductSchema = z.object({
   body: z.object({
     title: z.string().min(3).optional(),
     description: z.string().min(10).optional(),
-    price: z.number().positive().optional(),
+    price: z.coerce.number().positive().optional(),
     category: objectIdSchema.optional(),
-    stock: z.number().int().nonnegative().optional(),
-    status: z.enum(['DRAFT', 'PENDING_APPROVAL', 'ACTIVE', 'REJECTED', 'ARCHIVED']).optional()
+    stock: z.coerce.number().int().nonnegative().optional(),
+    status: z.enum(['DRAFT', 'PENDING_APPROVAL', 'ACTIVE', 'REJECTED', 'ARCHIVED']).optional(),
+    discountPercentage: z.coerce.number().min(0).max(100).optional()
   }).passthrough()
 });

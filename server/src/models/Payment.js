@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const paymentSchema = new mongoose.Schema(
   {
     order: { type: mongoose.Schema.Types.ObjectId, ref: 'Order', required: true, unique: true },
-    razorpayOrderId: { type: String },
-    razorpayPaymentId: { type: String },
+    stripeSessionId: { type: String },
+    stripePaymentIntentId: { type: String },
     amount: { type: Number, required: true },
-    paymentMethod: { type: String, enum: ['RAZORPAY', 'UPI', 'CARD', 'NETBANKING', 'WALLET'] },
-    status: { type: String, enum: ['SUCCESS', 'FAILED', 'PENDING'], default: 'PENDING' },
+    paymentMethod: { type: String, enum: ['STRIPE', 'RAZORPAY', 'UPI', 'CARD', 'NETBANKING', 'WALLET', 'COD'] },
+    status: { type: String, enum: ['SUCCESS', 'FAILED', 'PENDING', 'EXPIRED', 'REFUNDED'], default: 'PENDING' },
   },
   { timestamps: true }
 );

@@ -11,6 +11,7 @@ const cartSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true, required: true },
     items: [cartItemSchema],
     totalAmount: { type: Number, default: 0 },
+    recoveryEmailSentAt: { type: Date, default: null },
   },
   { timestamps: true }
 );
