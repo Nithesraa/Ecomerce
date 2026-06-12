@@ -24,7 +24,7 @@ const startServer = async () => {
     // Start background jobs
     startCartRecoveryJob();
 
-    server.listen(env.PORT, () => {
+    server.listen(env.PORT, '0.0.0.0', () => {
       logger.info(`🚀 Server running in ${env.NODE_ENV} mode on port ${env.PORT}`);
     });
 
