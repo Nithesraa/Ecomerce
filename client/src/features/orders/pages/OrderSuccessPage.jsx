@@ -39,32 +39,32 @@ export const OrderSuccessPage = () => {
           Order Received
         </h1>
         
-        <p className="text-gray-500 mb-12 max-w-md mx-auto text-[17px]">
+        <p className="text-gray-500 mb-12 max-w-md mx-auto text-[14px]">
           Thank you for your purchase. We've received your order and are currently processing it. A confirmation email has been sent to you.
         </p>
         
         <div className="w-full bg-gray-50 dark:bg-[#111111] p-8 border border-[#E2E8F0] dark:border-white/[0.05] flex flex-col sm:flex-row justify-between items-center text-left mb-12 gap-6 sm:gap-0">
           <div>
-            <span className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-1">Order Number</span>
-            <span className="text-[18px] font-black tracking-widest text-black dark:text-white">{currentOrder.orderId}</span>
+            <span className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-1">Order Number</span>
+            <span className="text-[15px] font-black tracking-widest text-black dark:text-white">{currentOrder.orderId}</span>
           </div>
           <div className="w-px h-12 bg-[#E2E8F0] dark:bg-white/[0.1] hidden sm:block"></div>
           <div>
-            <span className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-1">Total Paid</span>
-            <span className="text-[18px] font-black tracking-widest text-black dark:text-white">${currentOrder.totalAmount.toFixed(2)}</span>
+            <span className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-1">Total Paid</span>
+            <span className="text-[15px] font-black tracking-widest text-black dark:text-white">${currentOrder.totalAmount.toFixed(2)}</span>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
           <Link 
             to="/profile"
-            className="h-14 px-10 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[18px] hover:opacity-80 transition-opacity flex items-center justify-center gap-2"
+            className="h-14 px-10 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[15px] hover:opacity-80 transition-opacity flex items-center justify-center gap-2"
           >
             View Order History <ArrowRight className="w-4 h-4" />
           </Link>
           <Link 
             to="/products"
-            className="h-14 px-10 bg-transparent border-2 border-black dark:border-white text-black dark:text-white font-bold uppercase tracking-widest text-[18px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors flex items-center justify-center"
+            className="h-14 px-10 bg-transparent border-2 border-black dark:border-white text-black dark:text-white font-bold uppercase tracking-widest text-[15px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors flex items-center justify-center"
           >
             Continue Shopping
           </Link>

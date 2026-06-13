@@ -76,7 +76,7 @@ export const SellerAuthPage = () => {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-24 bg-white relative z-10 shadow-2xl">
         <Link to="/" className="absolute top-8 left-8 flex items-center gap-2 text-black hover:opacity-70 transition-opacity">
           <Store className="w-5 h-5" />
-          <span className="font-black tracking-tighter uppercase text-lg">ShopSphere</span>
+          <span className="font-black tracking-tighter uppercase text-sm">ShopSphere</span>
         </Link>
 
         <div className="w-full max-w-md">
@@ -85,7 +85,7 @@ export const SellerAuthPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-3xl sm:text-4xl font-black tracking-tight uppercase text-black mb-2">
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-black mb-2">
               {isLogin ? 'Seller Login' : 'Become a Partner'}
             </h1>
             <p className="text-gray-500 font-medium mb-10">
@@ -101,7 +101,7 @@ export const SellerAuthPage = () => {
                     exit={{ opacity: 0, height: 0 }}
                     className="space-y-1 overflow-hidden"
                   >
-                    <label className="text-[17px] font-bold text-gray-400 uppercase tracking-widest">Company Name</label>
+                    <label className="text-[14px] font-bold text-gray-400 uppercase tracking-widest">Company Name</label>
                     <input
                       {...register('name')}
                       type="text"
@@ -109,13 +109,13 @@ export const SellerAuthPage = () => {
                       className="w-full bg-gray-50 border border-gray-200 text-black px-4 py-3.5 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                       placeholder="e.g. Acme Corp"
                     />
-                    {errors.name && <p className="text-red-500 text-lg mt-1">{errors.name.message}</p>}
+                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                   </motion.div>
                 )}
               </AnimatePresence>
 
               <div className="space-y-1">
-                <label className="text-[17px] font-bold text-gray-400 uppercase tracking-widest">Email Address</label>
+                <label className="text-[14px] font-bold text-gray-400 uppercase tracking-widest">Email Address</label>
                 <input
                   {...register('email')}
                   type="email"
@@ -123,11 +123,11 @@ export const SellerAuthPage = () => {
                   className="w-full bg-gray-50 border border-gray-200 text-black px-4 py-3.5 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                   placeholder="name@company.com"
                 />
-                {errors.email && <p className="text-red-500 text-lg mt-1">{errors.email.message}</p>}
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
 
               <div className="space-y-1">
-                <label className="text-[17px] font-bold text-gray-400 uppercase tracking-widest">Password</label>
+                <label className="text-[14px] font-bold text-gray-400 uppercase tracking-widest">Password</label>
                 <input
                   {...register('password')}
                   type="password"
@@ -135,19 +135,19 @@ export const SellerAuthPage = () => {
                   className="w-full bg-gray-50 border border-gray-200 text-black px-4 py-3.5 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
                   placeholder="••••••••"
                 />
-                {errors.password && <p className="text-red-500 text-lg mt-1">{errors.password.message}</p>}
+                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
               </div>
 
               {error && (
                 <div className="p-4 bg-red-50 border border-red-100 rounded-xl">
-                  <p className="text-red-600 text-lg font-medium">{error}</p>
+                  <p className="text-red-600 text-sm font-medium">{error}</p>
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-widest text-lg py-4 rounded-xl transition-all flex items-center justify-center gap-2 group disabled:opacity-70"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase tracking-widest text-sm py-4 rounded-xl transition-all flex items-center justify-center gap-2 group disabled:opacity-70"
               >
                 {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isLogin ? 'Sign In' : 'Create Account')}
                 {!isLoading && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
@@ -155,7 +155,7 @@ export const SellerAuthPage = () => {
             </form>
 
             <div className="mt-8 text-center">
-              <p className="text-gray-500 text-lg">
+              <p className="text-gray-500 text-sm">
                 {isLogin ? "Don't have a seller account?" : "Already a partner?"}
                 <button onClick={toggleMode} className="ml-2 text-blue-600 font-bold hover:underline">
                   {isLogin ? 'Apply Now' : 'Sign In'}
@@ -175,8 +175,8 @@ export const SellerAuthPage = () => {
         </div>
 
         <div className="relative z-10 max-w-lg text-white">
-          <h2 className="text-4xl font-black uppercase tracking-tight mb-6 leading-tight">Scale your brand globally.</h2>
-          <p className="text-gray-400 text-lg mb-12">
+          <h2 className="text-2xl font-black uppercase tracking-tight mb-6 leading-tight">Scale your brand globally.</h2>
+          <p className="text-gray-400 text-sm mb-12">
             Join the platform built for modern commerce. Manage your inventory, track analytics, and reach millions of customers instantly.
           </p>
 
@@ -186,8 +186,8 @@ export const SellerAuthPage = () => {
                 <Globe className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Global Reach</h3>
-                <p className="text-gray-400 text-lg">Access customers in over 150 countries with automated localization and currency conversion.</p>
+                <h3 className="font-bold text-sm mb-1">Global Reach</h3>
+                <p className="text-gray-400 text-sm">Access customers in over 150 countries with automated localization and currency conversion.</p>
               </div>
             </div>
             
@@ -196,8 +196,8 @@ export const SellerAuthPage = () => {
                 <BarChart className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Advanced Analytics</h3>
-                <p className="text-gray-400 text-lg">Make data-driven decisions with real-time insights into sales, traffic, and customer behavior.</p>
+                <h3 className="font-bold text-sm mb-1">Advanced Analytics</h3>
+                <p className="text-gray-400 text-sm">Make data-driven decisions with real-time insights into sales, traffic, and customer behavior.</p>
               </div>
             </div>
 
@@ -206,8 +206,8 @@ export const SellerAuthPage = () => {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-bold text-lg mb-1">Secure Operations</h3>
-                <p className="text-gray-400 text-lg">Enterprise-grade security protecting your data, your revenue, and your customers.</p>
+                <h3 className="font-bold text-sm mb-1">Secure Operations</h3>
+                <p className="text-gray-400 text-sm">Enterprise-grade security protecting your data, your revenue, and your customers.</p>
               </div>
             </div>
           </div>

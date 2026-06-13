@@ -19,7 +19,7 @@ export const StarRating = ({ rating, count, className }) => {
         })}
       </div>
       {count !== undefined && (
-        <span className="text-lg text-[#64748B] dark:text-[#94A3B8]">({count})</span>
+        <span className="text-sm text-[#64748B] dark:text-[#94A3B8]">({count})</span>
       )}
     </div>
   );

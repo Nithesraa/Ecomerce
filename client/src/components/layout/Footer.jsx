@@ -18,11 +18,11 @@ export const Footer = () => {
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300 transform group-hover:-translate-y-1">
                 <ShoppingBag className="w-5 h-5 text-white" />
               </div>
-              <span className="text-2xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
+              <span className="text-lg font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
                 ShopSphere
               </span>
             </Link>
-            <p className="text-lg text-gray-500 dark:text-gray-400 leading-relaxed mb-8 max-w-sm">
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-8 max-w-sm">
               Powering modern commerce. ShopSphere provides the premium infrastructure for seamless buying and selling globally. Engineered for the future.
             </p>
             <div className="flex gap-4">
@@ -45,7 +45,7 @@ export const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-lg tracking-wider flex items-center gap-2">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-sm tracking-wider flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-blue-500"></span>
               Shop
             </h4>
@@ -57,7 +57,7 @@ export const Footer = () => {
                 { name: 'Home & Living', path: '/products?category=home' },
               ].map((link, i) => (
                 <li key={i}>
-                  <Link to={link.path} className="text-lg text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors relative group inline-block">
+                  <Link to={link.path} className="text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors relative group inline-block">
                     {link.name}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
                   </Link>
@@ -67,14 +67,14 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-lg tracking-wider flex items-center gap-2">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-sm tracking-wider flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-purple-500"></span>
               Support
             </h4>
             <ul className="space-y-4">
               {['Help Center', 'Track Order', 'Returns & Refunds', 'Contact Us'].map((item, i) => (
                 <li key={i}>
-                  <a href="#" className="text-lg text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors relative group inline-block">
+                  <a href="#" className="text-sm text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors relative group inline-block">
                     {item}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 dark:bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
                   </a>
@@ -85,11 +85,11 @@ export const Footer = () => {
 
           {/* Newsletter */}
           <div className="lg:col-span-1">
-            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-lg tracking-wider flex items-center gap-2">
+            <h4 className="font-bold text-gray-900 dark:text-white mb-6 uppercase text-sm tracking-wider flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-pink-500"></span>
               Stay Updated
             </h4>
-            <p className="text-lg text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
               Subscribe to get special offers and once-in-a-lifetime deals.
             </p>
             <form className="relative group" onSubmit={(e) => e.preventDefault()}>
@@ -99,7 +99,7 @@ export const Footer = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white pl-10 pr-12 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 dark:focus:ring-blue-500/50 dark:focus:border-blue-500 transition-all text-lg placeholder:text-gray-400"
+                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white pl-10 pr-12 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 dark:focus:ring-blue-500/50 dark:focus:border-blue-500 transition-all text-sm placeholder:text-gray-400"
               />
               <button 
                 type="submit"
@@ -114,10 +114,10 @@ export const Footer = () => {
         
         {/* Bottom */}
         <div className="pt-8 border-t border-gray-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-lg text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             © {new Date().getFullYear()} <span className="font-semibold text-gray-900 dark:text-white">ShopSphere</span>, Inc. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-6 text-lg text-gray-500 dark:text-gray-400">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
             {['Privacy Policy', 'Terms of Service', 'Cookie Settings'].map((item, i) => (
               <a key={i} href="#" className="hover:text-gray-900 dark:hover:text-white transition-colors relative group">
                 {item}

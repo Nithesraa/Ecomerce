@@ -26,11 +26,11 @@ export const CategoryCard = ({ category }) => {
         <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-white/[0.03] text-gray-700 dark:text-gray-300 mb-4 group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-gray-900 transition-colors">
           <Icon className="w-[22px] h-[22px]" />
         </div>
-        <h3 className="text-[17px] font-semibold tracking-wide text-gray-900 dark:text-[#fafafa] text-center">
+        <h3 className="text-[14px] font-semibold tracking-wide text-gray-900 dark:text-[#fafafa] text-center">
           {category.name}
         </h3>
         {category.description && (
-          <p className="text-[18px] text-[#64748B] dark:text-[#94A3B8] text-center mt-1.5 line-clamp-2">
+          <p className="text-[15px] text-[#64748B] dark:text-[#94A3B8] text-center mt-1.5 line-clamp-2">
             {category.description}
           </p>
         )}

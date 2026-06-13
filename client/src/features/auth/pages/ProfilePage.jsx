@@ -76,8 +76,8 @@ export const ProfilePage = () => {
         {/* Sidebar */}
         <div className="w-full md:w-1/4 flex flex-col gap-12 shrink-0">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter mb-4">Account</h1>
-            <p className="text-[13px] md:text-[15px] font-semibold tracking-[0.2em] text-gray-500 uppercase">Welcome, {user?.email?.split('@')[0]}</p>
+            <h1 className="text-xl md:text-2xl font-bold uppercase tracking-tighter mb-4">Account</h1>
+            <p className="text-[13px] md:text-[15px] font-semibold tracking-widest text-gray-500 uppercase">Welcome, {user?.email?.split('@')[0]}</p>
           </div>
           
           <nav className="flex flex-col gap-8">
@@ -142,35 +142,35 @@ export const ProfilePage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
                     <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Total Orders</p>
-                    <p className="text-3xl md:text-4xl font-light">{pagination?.total || orders.length}</p>
+                    <p className="text-xl md:text-2xl font-light">{pagination?.total || orders.length}</p>
                   </div>
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
                     <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Total Spent</p>
-                    <p className="text-3xl md:text-4xl font-light">${totalSpent.toFixed(2)}</p>
+                    <p className="text-xl md:text-2xl font-light">${totalSpent.toFixed(2)}</p>
                   </div>
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
                     <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Saved Items</p>
-                    <p className="text-3xl md:text-4xl font-light">{wishlistItems.length}</p>
+                    <p className="text-xl md:text-2xl font-light">{wishlistItems.length}</p>
                   </div>
                 </div>
 
                 {/* Recent Orders Overview */}
                 <div>
-                  <h2 className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 pb-6 mb-8 flex justify-between items-end">
+                  <h2 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 dark:border-white/10 pb-6 mb-8 flex justify-between items-end">
                     <span>Recent Orders</span>
-                    <button onClick={() => setActiveTab('orders')} className="text-gray-400 hover:text-black dark:hover:text-white text-lg font-bold uppercase tracking-widest transition-colors">View All</button>
+                    <button onClick={() => setActiveTab('orders')} className="text-gray-400 hover:text-black dark:hover:text-white text-sm font-bold uppercase tracking-widest transition-colors">View All</button>
                   </h2>
                   
                   {orders.length === 0 ? (
-                    <p className="text-lg text-gray-500 uppercase tracking-widest py-8">No recent orders.</p>
+                    <p className="text-sm text-gray-500 uppercase tracking-widest py-8">No recent orders.</p>
                   ) : (
                     <div className="flex flex-col">
                       {orders.slice(0, 2).map((order) => (
                         <div key={order._id} className="grid grid-cols-1 md:grid-cols-12 gap-4 md:items-center py-6 border-b border-black/5 dark:border-white/5 group hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors -mx-4 px-4">
                           <div className="col-span-3">
-                            <span className="text-lg font-bold uppercase tracking-widest text-black dark:text-white">#{order._id.substring(order._id.length - 8)}</span>
+                            <span className="text-sm font-bold uppercase tracking-widest text-black dark:text-white">#{order._id.substring(order._id.length - 8)}</span>
                           </div>
-                          <div className="col-span-3 text-lg text-gray-500">
+                          <div className="col-span-3 text-sm text-gray-500">
                             {formatDate(order.createdAt)}
                           </div>
                           <div className="col-span-2">
@@ -195,13 +195,13 @@ export const ProfilePage = () => {
 
                 {/* Wishlist Overview */}
                 <div>
-                  <h2 className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 pb-6 mb-8 flex justify-between items-end">
+                  <h2 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 dark:border-white/10 pb-6 mb-8 flex justify-between items-end">
                     <span>Saved Items</span>
-                    <button onClick={() => setActiveTab('saved')} className="text-gray-400 hover:text-black dark:hover:text-white text-lg font-bold uppercase tracking-widest transition-colors">View All</button>
+                    <button onClick={() => setActiveTab('saved')} className="text-gray-400 hover:text-black dark:hover:text-white text-sm font-bold uppercase tracking-widest transition-colors">View All</button>
                   </h2>
                   
                   {wishlistItems.length === 0 ? (
-                    <p className="text-lg text-gray-500 uppercase tracking-widest py-8">Your wishlist is empty.</p>
+                    <p className="text-sm text-gray-500 uppercase tracking-widest py-8">Your wishlist is empty.</p>
                   ) : (
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                       {wishlistItems.slice(0, 4).map((item) => (
@@ -209,8 +209,8 @@ export const ProfilePage = () => {
                           <div className="aspect-[3/4] bg-gray-100 dark:bg-white/5 mb-4 overflow-hidden relative">
                             <img src={item.product?.images?.[0]?.url || '/placeholder.png'} alt="Product" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal group-hover:scale-105 transition-transform duration-700" />
                           </div>
-                          <h3 className="text-lg font-bold uppercase tracking-widest mb-1 truncate">{item.product?.title}</h3>
-                          <p className="text-lg font-medium">${item.product?.price?.toFixed(2)}</p>
+                          <h3 className="text-sm font-bold uppercase tracking-widest mb-1 truncate">{item.product?.title}</h3>
+                          <p className="text-sm font-medium">${item.product?.price?.toFixed(2)}</p>
                         </div>
                       ))}
                     </div>
@@ -221,18 +221,18 @@ export const ProfilePage = () => {
             
             {activeTab === 'details' && (
               <div className="max-w-2xl">
-                <h2 className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 pb-6 mb-10">Profile Details</h2>
+                <h2 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 dark:border-white/10 pb-6 mb-10">Profile Details</h2>
                 
                 <div className="flex flex-col gap-10">
                   <div>
-                    <label className="block text-lg font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Email Address</label>
-                    <div className="text-2xl font-medium tracking-wide">
+                    <label className="block text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Email Address</label>
+                    <div className="text-lg font-medium tracking-wide">
                       {user?.email}
                     </div>
                   </div>
                   <div>
-                    <label className="block text-lg font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Account Role</label>
-                    <div className="text-xl font-semibold tracking-widest uppercase">
+                    <label className="block text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Account Role</label>
+                    <div className="text-base font-semibold tracking-widest uppercase">
                       {user?.role}
                     </div>
                   </div>
@@ -242,9 +242,9 @@ export const ProfilePage = () => {
 
             {activeTab === 'saved' && (
               <div>
-                <h2 className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 pb-6 mb-10 flex justify-between items-end">
+                <h2 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 dark:border-white/10 pb-6 mb-10 flex justify-between items-end">
                   <span>Saved Items</span>
-                  <span className="text-gray-400 text-lg font-bold uppercase tracking-widest">{wishlistItems.length} Items</span>
+                  <span className="text-gray-400 text-sm font-bold uppercase tracking-widest">{wishlistItems.length} Items</span>
                 </h2>
                 
                 {wishlistLoading && wishlistItems.length === 0 ? (
@@ -255,10 +255,10 @@ export const ProfilePage = () => {
                   </div>
                 ) : wishlistItems.length === 0 ? (
                   <div className="py-20 flex flex-col items-start border-t border-b border-black/10 dark:border-white/10">
-                    <p className="text-lg font-medium text-gray-500 uppercase tracking-widest mb-8">You have no saved items.</p>
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-8">You have no saved items.</p>
                     <button 
                       onClick={() => navigate('/products')} 
-                      className="text-lg font-bold uppercase tracking-[0.2em] flex items-center gap-4 hover:gap-6 transition-all border-b border-black dark:border-white pb-1"
+                      className="text-sm font-bold uppercase tracking-widest flex items-center gap-4 hover:gap-6 transition-all border-b border-black dark:border-white pb-1"
                     >
                       Explore Products <ArrowRight className="w-5 h-5" />
                     </button>
@@ -282,8 +282,8 @@ export const ProfilePage = () => {
                         >
                           <Heart className="w-5 h-5 fill-black dark:fill-white text-black dark:text-white" />
                         </button>
-                        <h3 className="text-lg font-bold uppercase tracking-widest mb-1 truncate pr-8" title={item.product?.title}>{item.product?.title}</h3>
-                        <p className="text-lg font-medium">${item.product?.price?.toFixed(2)}</p>
+                        <h3 className="text-sm font-bold uppercase tracking-widest mb-1 truncate pr-8" title={item.product?.title}>{item.product?.title}</h3>
+                        <p className="text-sm font-medium">${item.product?.price?.toFixed(2)}</p>
                       </div>
                     ))}
                   </div>
@@ -293,9 +293,9 @@ export const ProfilePage = () => {
 
             {activeTab === 'orders' && (
               <div>
-                <h2 className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 pb-6 mb-10 flex justify-between items-end">
+                <h2 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 dark:border-white/10 pb-6 mb-10 flex justify-between items-end">
                   <span>Order History</span>
-                  <span className="text-gray-400 text-lg font-bold uppercase tracking-widest">{pagination?.total || orders.length} Orders</span>
+                  <span className="text-gray-400 text-sm font-bold uppercase tracking-widest">{pagination?.total || orders.length} Orders</span>
                 </h2>
                 
                 {ordersLoading && orders.length === 0 ? (
@@ -306,10 +306,10 @@ export const ProfilePage = () => {
                   </div>
                 ) : orders.length === 0 ? (
                   <div className="py-20 flex flex-col items-start border-t border-b border-black/10 dark:border-white/10">
-                    <p className="text-lg font-medium text-gray-500 uppercase tracking-widest mb-8">You have no order history.</p>
+                    <p className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-8">You have no order history.</p>
                     <button 
                       onClick={() => navigate('/products')} 
-                      className="text-lg font-bold uppercase tracking-[0.2em] flex items-center gap-4 hover:gap-6 transition-all border-b border-black dark:border-white pb-1"
+                      className="text-sm font-bold uppercase tracking-widest flex items-center gap-4 hover:gap-6 transition-all border-b border-black dark:border-white pb-1"
                     >
                       Start Shopping <ArrowRight className="w-5 h-5" />
                     </button>
@@ -317,7 +317,7 @@ export const ProfilePage = () => {
                 ) : (
                   <div className="flex flex-col">
                     {/* Table Header */}
-                    <div className="hidden md:grid grid-cols-12 gap-4 pb-4 text-lg font-bold text-gray-400 uppercase tracking-[0.2em] border-b border-black/10 dark:border-white/10 mb-6">
+                    <div className="hidden md:grid grid-cols-12 gap-4 pb-4 text-sm font-bold text-gray-400 uppercase tracking-widest border-b border-black/10 dark:border-white/10 mb-6">
                       <div className="col-span-2">Order</div>
                       <div className="col-span-3">Date</div>
                       <div className="col-span-2">Status</div>
@@ -330,9 +330,9 @@ export const ProfilePage = () => {
                     {orders.map((order) => (
                       <div key={order._id} className="grid grid-cols-1 md:grid-cols-12 gap-4 md:items-center py-6 border-b border-black/5 dark:border-white/5 group hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors -mx-4 px-4">
                         <div className="col-span-2">
-                          <span className="text-lg font-bold uppercase tracking-widest text-black dark:text-white">#{order._id.substring(order._id.length - 8)}</span>
+                          <span className="text-sm font-bold uppercase tracking-widest text-black dark:text-white">#{order._id.substring(order._id.length - 8)}</span>
                         </div>
-                        <div className="col-span-3 text-lg text-gray-500">
+                        <div className="col-span-3 text-sm text-gray-500">
                           {formatDate(order.createdAt)}
                         </div>
                         <div className="col-span-2">
@@ -383,7 +383,7 @@ export const ProfilePage = () => {
               className="fixed inset-y-0 right-0 z-[210] w-full max-w-2xl bg-white dark:bg-[#050505] shadow-2xl flex flex-col border-l border-black/10 dark:border-white/10"
             >
               <div className="p-8 md:p-12 border-b border-black/10 dark:border-white/10 flex justify-between items-center shrink-0">
-                <h3 className="text-lg font-bold uppercase tracking-[0.2em]">Order Summary</h3>
+                <h3 className="text-sm font-bold uppercase tracking-widest">Order Summary</h3>
                 <div className="flex items-center gap-4">
                   {currentOrder && (
                     <button 
@@ -413,15 +413,15 @@ export const ProfilePage = () => {
                   <div className="flex flex-col gap-16">
                     {/* Order ID & Date */}
                     <div>
-                      <p className="text-lg font-bold text-gray-400 uppercase tracking-[0.3em] mb-2">Order Reference</p>
-                      <p className="text-3xl font-light tracking-tight mb-2">#{currentOrder.order?._id}</p>
-                      <p className="text-lg font-semibold text-gray-500 uppercase tracking-widest">{currentOrder.order?.createdAt ? formatDate(currentOrder.order.createdAt) : ''}</p>
+                      <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Order Reference</p>
+                      <p className="text-xl font-light tracking-tight mb-2">#{currentOrder.order?._id}</p>
+                      <p className="text-sm font-semibold text-gray-500 uppercase tracking-widest">{currentOrder.order?.createdAt ? formatDate(currentOrder.order.createdAt) : ''}</p>
                     </div>
 
                     {/* Order Tracking Timeline */}
                     {currentOrder.order?.orderStatus === 'CANCELLED' ? (
                       <div className="py-6 px-8 border border-red-500/20 bg-red-500/5 text-red-500">
-                        <p className="text-lg font-bold uppercase tracking-widest text-center">Order Cancelled</p>
+                        <p className="text-sm font-bold uppercase tracking-widest text-center">Order Cancelled</p>
                       </div>
                     ) : (
                       <div className="relative pt-8 pb-4">
@@ -455,7 +455,7 @@ export const ProfilePage = () => {
 
                     {/* Items */}
                     <div>
-                      <h4 className="text-lg font-bold tracking-[0.3em] text-gray-400 uppercase mb-8 border-b border-black/10 dark:border-white/10 pb-4">Purchases</h4>
+                      <h4 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-8 border-b border-black/10 dark:border-white/10 pb-4">Purchases</h4>
                       <div className="flex flex-col gap-8">
                         {currentOrder.items?.map((item, index) => (
                           <div key={index} className="flex gap-6 group">
@@ -463,18 +463,18 @@ export const ProfilePage = () => {
                               <img src={item.product?.images?.[0]?.url || '/placeholder.png'} alt="Product" className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-normal" />
                             </div>
                             <div className="flex-1 flex flex-col pt-1">
-                              <span className="font-semibold text-lg uppercase tracking-wide leading-relaxed mb-2">{item.product?.title || 'Product'}</span>
-                              <span className="text-lg font-medium text-gray-500 mb-auto">Qty: {item.quantity}</span>
+                              <span className="font-semibold text-sm uppercase tracking-wide leading-relaxed mb-2">{item.product?.title || 'Product'}</span>
+                              <span className="text-sm font-medium text-gray-500 mb-auto">Qty: {item.quantity}</span>
                               
                               <div className="flex items-end justify-between mt-4">
-                                <span className="font-medium text-lg">${(item.priceAtPurchase * item.quantity).toFixed(2)}</span>
+                                <span className="font-medium text-sm">${(item.priceAtPurchase * item.quantity).toFixed(2)}</span>
                                 
                                 {currentOrder.order?.orderStatus === 'DELIVERED' && item.product?._id && (
                                   <button 
                                     onClick={() => {
                                       setReviewModalData({ productId: item.product._id, title: item.product.title });
                                     }}
-                                    className="text-lg font-bold uppercase tracking-[0.2em] border-b border-black dark:border-white pb-0.5"
+                                    className="text-sm font-bold uppercase tracking-widest border-b border-black dark:border-white pb-0.5"
                                   >
                                     Write Review
                                   </button>
@@ -489,8 +489,8 @@ export const ProfilePage = () => {
                     <div className="flex flex-col md:flex-row gap-12">
                       {/* Shipping */}
                       <div className="flex-1">
-                        <h4 className="text-lg font-bold tracking-[0.3em] text-gray-400 uppercase mb-6 border-b border-black/10 dark:border-white/10 pb-4">Shipping</h4>
-                        <div className="text-lg font-medium text-gray-600 dark:text-gray-400 leading-loose uppercase tracking-widest">
+                        <h4 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-6 border-b border-black/10 dark:border-white/10 pb-4">Shipping</h4>
+                        <div className="text-sm font-medium text-gray-600 dark:text-gray-400 leading-loose uppercase tracking-widest">
                           <p>{currentOrder.order?.shippingAddress?.street}</p>
                           <p>{currentOrder.order?.shippingAddress?.city}, {currentOrder.order?.shippingAddress?.state}</p>
                           <p>{currentOrder.order?.shippingAddress?.zipCode}</p>
@@ -500,8 +500,8 @@ export const ProfilePage = () => {
 
                       {/* Payment and Actions */}
                       <div className="flex-1">
-                        <h4 className="text-lg font-bold tracking-[0.3em] text-gray-400 uppercase mb-6 border-b border-black/10 dark:border-white/10 pb-4">Payment & Actions</h4>
-                        <div className="flex flex-col gap-4 text-lg font-medium tracking-widest uppercase mb-8">
+                        <h4 className="text-sm font-bold tracking-widest text-gray-400 uppercase mb-6 border-b border-black/10 dark:border-white/10 pb-4">Payment & Actions</h4>
+                        <div className="flex flex-col gap-4 text-sm font-medium tracking-widest uppercase mb-8">
                           <div className="flex justify-between">
                             <span className="text-gray-500">Status</span>
                             <span className="font-bold">{currentOrder.order?.paymentStatus}</span>
@@ -512,7 +512,7 @@ export const ProfilePage = () => {
                           </div>
                           <div className="flex justify-between mt-2 pt-4 border-t border-black/10 dark:border-white/10">
                             <span className="font-bold text-gray-500">Total</span>
-                            <span className="font-bold text-lg">${currentOrder.order?.totalAmount?.toFixed(2)}</span>
+                            <span className="font-bold text-sm">${currentOrder.order?.totalAmount?.toFixed(2)}</span>
                           </div>
                         </div>
 
@@ -521,7 +521,7 @@ export const ProfilePage = () => {
                           {['PENDING', 'PROCESSING'].includes(currentOrder.order?.orderStatus) && (
                             <button
                               onClick={() => dispatch(updateMyOrderStatus({ orderId: currentOrder.order._id, status: 'CANCELLED' }))}
-                              className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-lg uppercase tracking-widest hover:bg-red-700 transition-colors"
+                              className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-sm uppercase tracking-widest hover:bg-red-700 transition-colors"
                             >
                               Cancel Order
                             </button>
@@ -529,7 +529,7 @@ export const ProfilePage = () => {
                           {currentOrder.order?.orderStatus === 'DELIVERED' && (
                             <button
                               onClick={() => dispatch(updateMyOrderStatus({ orderId: currentOrder.order._id, status: 'RETURN_REQUESTED' }))}
-                              className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-lg uppercase tracking-widest hover:scale-[1.02] transition-transform"
+                              className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-sm uppercase tracking-widest hover:scale-[1.02] transition-transform"
                             >
                               Request Return
                             </button>

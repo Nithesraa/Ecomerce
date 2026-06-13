@@ -60,9 +60,9 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-white/[0.05] sticky top-0 bg-white/80 dark:bg-[#111]/80 backdrop-blur-md z-10">
                 <div>
-                  <h2 className="text-xl font-black uppercase tracking-tight text-gray-900 dark:text-white flex items-center gap-2">
+                  <h2 className="text-base font-black uppercase tracking-tight text-gray-900 dark:text-white flex items-center gap-2">
                     Order #{order._id.slice(-6).toUpperCase()}
-                    <span className={`text-[18px] px-2 py-1 rounded-full tracking-widest font-bold ${
+                    <span className={`text-[15px] px-2 py-1 rounded-full tracking-widest font-bold ${
                       order.orderStatus === 'DELIVERED' ? 'bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-400' :
                       order.orderStatus === 'CANCELLED' ? 'bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-400' :
                       'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400'
@@ -70,7 +70,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                       {order.orderStatus}
                     </span>
                   </h2>
-                  <p className="text-lg text-gray-500 mt-1 flex items-center gap-1">
+                  <p className="text-sm text-gray-500 mt-1 flex items-center gap-1">
                     <Clock className="w-3 h-3" /> {format(new Date(order.createdAt), 'MMM d, yyyy h:mm a')}
                   </p>
                 </div>
@@ -89,7 +89,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                 <div className="lg:col-span-2 flex flex-col gap-8">
                   {/* Items */}
                   <section>
-                    <h3 className="text-lg font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
                       <Package className="w-4 h-4" /> Ordered Items
                     </h3>
                     <div className="flex flex-col gap-4">
@@ -97,7 +97,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                         <div key={item._id} className="flex justify-between items-center p-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-100 dark:border-white/[0.05]">
                           <div className="flex flex-col">
                             <span className="font-bold text-gray-900 dark:text-white">{item.productTitle}</span>
-                            <span className="text-lg text-gray-500">Qty: {item.quantity}</span>
+                            <span className="text-sm text-gray-500">Qty: {item.quantity}</span>
                           </div>
                           <div className="font-bold text-gray-900 dark:text-white">
                             ${(item.priceAtPurchase * item.quantity).toFixed(2)}
@@ -109,10 +109,10 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
 
                   {/* Financial Summary */}
                   <section className="bg-gray-50 dark:bg-white/[0.02] rounded-xl p-5 border border-gray-100 dark:border-white/[0.05]">
-                    <h3 className="text-lg font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
                       <DollarSign className="w-4 h-4" /> Payment Summary
                     </h3>
-                    <div className="flex flex-col gap-2 text-lg">
+                    <div className="flex flex-col gap-2 text-sm">
                       <div className="flex justify-between text-gray-500">
                         <span>Subtotal</span>
                         <span>${(order.totalAmount + order.discountAmount).toFixed(2)}</span>
@@ -127,7 +127,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                         <span>Shipping</span>
                         <span>Free</span>
                       </div>
-                      <div className="flex justify-between text-lg font-black text-gray-900 dark:text-white pt-2">
+                      <div className="flex justify-between text-sm font-black text-gray-900 dark:text-white pt-2">
                         <span>Total</span>
                         <span>${order.totalAmount.toFixed(2)}</span>
                       </div>
@@ -139,10 +139,10 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                 <div className="flex flex-col gap-8">
                   {/* Shipping Address */}
                   <section>
-                    <h3 className="text-lg font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
                       <MapPin className="w-4 h-4" /> Shipping Address
                     </h3>
-                    <div className="bg-gray-50 dark:bg-white/[0.02] p-4 rounded-xl border border-gray-100 dark:border-white/[0.05] text-lg text-gray-700 dark:text-gray-300 flex flex-col gap-1">
+                    <div className="bg-gray-50 dark:bg-white/[0.02] p-4 rounded-xl border border-gray-100 dark:border-white/[0.05] text-sm text-gray-700 dark:text-gray-300 flex flex-col gap-1">
                       <span className="font-bold text-black dark:text-white mb-1">Customer Info</span>
                       <span>{order.shippingAddress.street}</span>
                       <span>{order.shippingAddress.city}, {order.shippingAddress.state}</span>
@@ -153,7 +153,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
 
                   {/* Order Status Controller / Actions */}
                   <section>
-                    <h3 className="text-lg font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
+                    <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
                       <Truck className="w-4 h-4" /> {user.role === 'USER' ? 'Order Actions' : 'Update Status'}
                     </h3>
                     
@@ -162,7 +162,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                         {['PENDING', 'PROCESSING'].includes(order.orderStatus) && (
                           <button
                             onClick={() => { setStatus('CANCELLED'); setTimeout(handleStatusUpdate, 0); }}
-                            className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-lg hover:bg-red-700 transition-colors"
+                            className="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-sm hover:bg-red-700 transition-colors"
                           >
                             Cancel Order
                           </button>
@@ -170,13 +170,13 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                         {order.orderStatus === 'DELIVERED' && (
                           <button
                             onClick={() => { setStatus('RETURN_REQUESTED'); setTimeout(handleStatusUpdate, 0); }}
-                            className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-lg hover:scale-[1.02] transition-transform"
+                            className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-sm hover:scale-[1.02] transition-transform"
                           >
                             Request Return
                           </button>
                         )}
                         {!['PENDING', 'PROCESSING', 'DELIVERED'].includes(order.orderStatus) && (
-                          <div className="p-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-100 dark:border-white/[0.05] text-center text-lg text-gray-500">
+                          <div className="p-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-100 dark:border-white/[0.05] text-center text-sm text-gray-500">
                             No actions available for this order status.
                           </div>
                         )}
@@ -184,7 +184,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                     ) : (
                       // Admin / Seller Status Dropdown
                       order.orderStatus === 'CANCELLED' || order.orderStatus === 'RETURNED' ? (
-                        <div className="p-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-100 dark:border-white/[0.05] text-center text-lg text-gray-500">
+                        <div className="p-4 bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-100 dark:border-white/[0.05] text-center text-sm text-gray-500">
                           This order is permanently {order.orderStatus}.
                         </div>
                       ) : (
@@ -192,7 +192,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                           <select
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
-                            className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white"
+                            className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white"
                           >
                             <option value="PENDING">PENDING</option>
                             <option value="PROCESSING">PROCESSING</option>
@@ -205,7 +205,7 @@ export const OrderDetailsModal = ({ isOpen, onClose }) => {
                           <button
                             onClick={handleStatusUpdate}
                             disabled={status === order.orderStatus}
-                            className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-lg hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:hover:scale-100"
+                            className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-3 px-4 rounded-lg text-sm hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:hover:scale-100"
                           >
                             Update Status
                           </button>

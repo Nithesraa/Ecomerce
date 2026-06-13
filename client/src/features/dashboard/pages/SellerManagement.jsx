@@ -49,7 +49,7 @@ export const SellerManagement = () => {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black uppercase tracking-tight text-black dark:text-white">Seller Accounts</h1>
+          <h1 className="text-xl font-black uppercase tracking-tight text-black dark:text-white">Seller Accounts</h1>
           <p className="text-gray-500 mt-1 font-medium">Verify and manage partner stores</p>
         </div>
         

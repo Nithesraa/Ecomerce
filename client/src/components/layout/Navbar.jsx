@@ -61,9 +61,9 @@ export const Navbar = () => {
               <div className="w-8 h-8 bg-[#2563EB] rounded-lg flex items-center justify-center">
                 <ShoppingBag className="w-4 h-4 text-white" />
               </div>
-              <span className="text-[17px] font-bold tracking-tight text-[#0F172A] dark:text-white">ShopSphere</span>
+              <span className="text-[14px] font-bold tracking-tight text-[#0F172A] dark:text-white">ShopSphere</span>
             </Link>
-            <div className="hidden md:flex items-center gap-6 text-[18px] font-medium text-[#64748B] dark:text-[#94A3B8]">
+            <div className="hidden md:flex items-center gap-6 text-[15px] font-medium text-[#64748B] dark:text-[#94A3B8]">
               <Link to="/" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">Home</Link>
               <Link to="/products" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">Catalog</Link>
             </div>
@@ -78,7 +78,7 @@ export const Navbar = () => {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-gray-100/80 dark:bg-white/[0.03] border border-transparent dark:border-white/[0.02] hover:border-gray-200 dark:hover:border-white/[0.06] text-gray-900 dark:text-white pl-11 pr-4 py-2.5 rounded-2xl text-[18px] focus:outline-none focus:bg-white dark:focus:bg-white/[0.05] focus:ring-1 focus:ring-gray-200 dark:focus:ring-white/[0.1] focus:border-gray-200 dark:focus:border-white/[0.1] transition-all placeholder:text-gray-400"
+                className="w-full bg-gray-100/80 dark:bg-white/[0.03] border border-transparent dark:border-white/[0.02] hover:border-gray-200 dark:hover:border-white/[0.06] text-gray-900 dark:text-white pl-11 pr-4 py-2.5 rounded-2xl text-[15px] focus:outline-none focus:bg-white dark:focus:bg-white/[0.05] focus:ring-1 focus:ring-gray-200 dark:focus:ring-white/[0.1] focus:border-gray-200 dark:focus:border-white/[0.1] transition-all placeholder:text-gray-400"
               />
             </form>
           </div>
@@ -91,7 +91,7 @@ export const Navbar = () => {
               <Link to="/wishlist" className="relative p-2 text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
                 <Heart className="w-5 h-5" />
                 {wishlistItemCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[18px] font-bold flex items-center justify-center rounded-full">
+                  <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[15px] font-bold flex items-center justify-center rounded-full">
                     {wishlistItemCount}
                   </span>
                 )}
@@ -100,7 +100,7 @@ export const Navbar = () => {
               <Link to="/cart" className="relative p-2 text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white transition-colors">
                 <ShoppingCart className="w-5 h-5" />
                 {cartItemCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#2563EB] text-white text-[18px] font-bold flex items-center justify-center rounded-full">
+                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#2563EB] text-white text-[15px] font-bold flex items-center justify-center rounded-full">
                     {cartItemCount}
                   </span>
                 )}
@@ -112,8 +112,8 @@ export const Navbar = () => {
             {isAuthenticated ? (
               <div className="hidden md:flex items-center gap-4">
                 <div className="flex flex-col items-end">
-                  <span className="text-[17px] font-semibold text-[#0F172A] dark:text-white">{user?.name}</span>
-                  <span className="text-[17px] text-[#64748B] dark:text-[#94A3B8]">{user?.role}</span>
+                  <span className="text-[14px] font-semibold text-[#0F172A] dark:text-white">{user?.name}</span>
+                  <span className="text-[14px] text-[#64748B] dark:text-[#94A3B8]">{user?.role}</span>
                 </div>
                 <button
                   onClick={handleLogout}
@@ -124,10 +124,10 @@ export const Navbar = () => {
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-3">
-                <Link to="/login" className="text-[17px] font-semibold text-[#0F172A] dark:text-white hover:text-[#2563EB] transition-colors">
+                <Link to="/login" className="text-[14px] font-semibold text-[#0F172A] dark:text-white hover:text-[#2563EB] transition-colors">
                   Log in
                 </Link>
-                <Link to="/register" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[17px] font-semibold px-4 py-2 rounded-full transition-colors">
+                <Link to="/register" className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[14px] font-semibold px-4 py-2 rounded-full transition-colors">
                   Sign up
                 </Link>
               </div>
@@ -155,10 +155,10 @@ export const Navbar = () => {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-gray-50 dark:bg-[#1E293B] border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-2.5 rounded-lg text-lg"
+                className="w-full bg-gray-50 dark:bg-[#1E293B] border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-2.5 rounded-lg text-sm"
               />
             </form>
-            <div className="flex flex-col space-y-3 text-lg font-medium text-gray-900 dark:text-white">
+            <div className="flex flex-col space-y-3 text-sm font-medium text-gray-900 dark:text-white">
               <Link to="/">Home</Link>
               <Link to="/products">Catalog</Link>
               <Link to="/wishlist">Wishlist ({wishlistItemCount})</Link>

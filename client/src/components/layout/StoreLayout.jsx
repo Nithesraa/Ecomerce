@@ -27,36 +27,36 @@ export const StoreLayout = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-16 relative z-10">
           <div className="group">
-            <h3 className="font-bold uppercase tracking-[0.3em] text-lg mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">ShopSphere</h3>
-            <p className="text-gray-400/80 text-lg leading-relaxed max-w-xs transition-colors group-hover:text-gray-300">
+            <h3 className="font-bold uppercase tracking-widest text-sm mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">ShopSphere</h3>
+            <p className="text-gray-400/80 text-sm leading-relaxed max-w-xs transition-colors group-hover:text-gray-300">
               Engineered for the future of commerce. Premium infrastructure for global brands.
             </p>
           </div>
           <div>
-            <h4 className="font-bold uppercase tracking-[0.2em] text-lg mb-6 text-gray-200">Shop</h4>
-            <ul className="flex flex-col gap-4 text-gray-400 text-lg">
+            <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-gray-200">Shop</h4>
+            <ul className="flex flex-col gap-4 text-gray-400 text-sm">
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Men</a></li>
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Women</a></li>
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">New Arrivals</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold uppercase tracking-[0.2em] text-lg mb-6 text-gray-200">Support</h4>
-            <ul className="flex flex-col gap-4 text-gray-400 text-lg">
+            <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-gray-200">Support</h4>
+            <ul className="flex flex-col gap-4 text-gray-400 text-sm">
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">FAQ</a></li>
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Returns</a></li>
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Contact Us</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold uppercase tracking-[0.2em] text-lg mb-6 text-gray-200">Legal</h4>
-            <ul className="flex flex-col gap-4 text-gray-400 text-lg">
+            <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-gray-200">Legal</h4>
+            <ul className="flex flex-col gap-4 text-gray-400 text-sm">
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Terms of Service</a></li>
               <li><a href="#" className="inline-block hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-px after:bg-white after:transition-all after:duration-300 hover:after:w-full">Privacy Policy</a></li>
             </ul>
           </div>
         </div>
-        <div className="pt-8 text-[17px] text-gray-500/80 uppercase tracking-[0.2em] flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+        <div className="pt-8 text-[14px] text-gray-500/80 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
           <span className="hover:text-gray-300 transition-colors cursor-default">&copy; {new Date().getFullYear()} ShopSphere Inc.</span>
           <span className="hover:text-gray-300 transition-colors cursor-default">All rights reserved.</span>
         </div>

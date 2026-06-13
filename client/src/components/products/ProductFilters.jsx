@@ -21,10 +21,10 @@ export const ProductFilters = () => {
   return (
     <div className="w-full">
       <div className="flex items-end justify-between mb-10 border-b-2 border-black dark:border-white pb-4">
-        <h3 className="text-xl font-black uppercase tracking-tighter text-black dark:text-white leading-none">Filters</h3>
+        <h3 className="text-base font-black uppercase tracking-tighter text-black dark:text-white leading-none">Filters</h3>
         <button 
           onClick={() => dispatch(clearFilters())}
-          className="text-[17px] font-bold tracking-widest uppercase text-gray-500 hover:text-black dark:hover:text-white transition-colors"
+          className="text-[14px] font-bold tracking-widest uppercase text-gray-500 hover:text-black dark:hover:text-white transition-colors"
         >
           Clear All
         </button>
@@ -32,7 +32,7 @@ export const ProductFilters = () => {
 
       {/* Category Filter */}
       <div className="mb-10">
-        <h4 className="text-[17px] font-bold tracking-widest uppercase text-gray-400 mb-4">Category</h4>
+        <h4 className="text-[14px] font-bold tracking-widest uppercase text-gray-400 mb-4">Category</h4>
         <div className="flex flex-col gap-3">
           <label className="flex items-center gap-3 cursor-pointer group">
             <input 
@@ -43,7 +43,7 @@ export const ProductFilters = () => {
               onChange={handleCategoryChange}
               className="w-5 h-5 accent-black dark:accent-white cursor-pointer"
             />
-            <span className={`text-[17px] font-bold uppercase tracking-tight transition-colors ${!filters.category ? 'text-black dark:text-white' : 'text-gray-500 group-hover:text-black dark:group-hover:text-white'}`}>
+            <span className={`text-[14px] font-bold uppercase tracking-tight transition-colors ${!filters.category ? 'text-black dark:text-white' : 'text-gray-500 group-hover:text-black dark:group-hover:text-white'}`}>
               All Categories
             </span>
           </label>
@@ -58,7 +58,7 @@ export const ProductFilters = () => {
                 onChange={handleCategoryChange}
                 className="w-5 h-5 accent-black dark:accent-white cursor-pointer"
               />
-              <span className={`text-[17px] font-bold uppercase tracking-tight transition-colors ${filters.category === cat._id ? 'text-black dark:text-white' : 'text-gray-500 group-hover:text-black dark:group-hover:text-white'}`}>
+              <span className={`text-[14px] font-bold uppercase tracking-tight transition-colors ${filters.category === cat._id ? 'text-black dark:text-white' : 'text-gray-500 group-hover:text-black dark:group-hover:text-white'}`}>
                 {cat.name}
               </span>
             </label>
@@ -68,12 +68,12 @@ export const ProductFilters = () => {
 
       {/* Sort Filter */}
       <div className="mb-10">
-        <h4 className="text-[17px] font-bold tracking-widest uppercase text-gray-400 mb-4">Sort By</h4>
+        <h4 className="text-[14px] font-bold tracking-widest uppercase text-gray-400 mb-4">Sort By</h4>
         <div className="relative">
           <select 
             value={filters.sort} 
             onChange={handleSortChange}
-            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[18px] font-bold uppercase tracking-tight appearance-none cursor-pointer"
+            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[15px] font-bold uppercase tracking-tight appearance-none cursor-pointer"
           >
             <option value="createdAt_desc" className="text-black">Newest Arrivals</option>
             <option value="price_asc" className="text-black">Price: Low to High</option>
@@ -86,7 +86,7 @@ export const ProductFilters = () => {
 
       {/* Price Filter */}
       <div className="mb-10">
-        <h4 className="text-[17px] font-bold tracking-widest uppercase text-gray-400 mb-4">Price Range</h4>
+        <h4 className="text-[14px] font-bold tracking-widest uppercase text-gray-400 mb-4">Price Range</h4>
         <div className="flex items-center gap-6">
           <input 
             type="number" 
@@ -94,7 +94,7 @@ export const ProductFilters = () => {
             placeholder="Min" 
             value={filters.minPrice}
             onChange={handlePriceChange}
-            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[18px] font-bold uppercase tracking-tight placeholder-gray-400"
+            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[15px] font-bold uppercase tracking-tight placeholder-gray-400"
           />
           <span className="text-gray-300 dark:text-gray-600">-</span>
           <input 
@@ -103,7 +103,7 @@ export const ProductFilters = () => {
             placeholder="Max" 
             value={filters.maxPrice}
             onChange={handlePriceChange}
-            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[18px] font-bold uppercase tracking-tight placeholder-gray-400"
+            className="w-full bg-transparent border-b border-gray-300 dark:border-white/[0.2] text-black dark:text-white pb-3 outline-none focus:border-black dark:focus:border-white transition-all text-[15px] font-bold uppercase tracking-tight placeholder-gray-400"
           />
         </div>
       </div>

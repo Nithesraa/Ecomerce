@@ -44,7 +44,7 @@ export const RegisterPage = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-xl font-extrabold text-gray-900">
             Create a new account
           </h2>
         </div>
@@ -52,7 +52,7 @@ export const RegisterPage = () => {
           <div className="space-y-4">
             
             <div>
-              <label className="block text-lg font-medium text-gray-700">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700">Full Name</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-gray-400" />
@@ -62,15 +62,15 @@ export const RegisterPage = () => {
                   {...register('name')}
                   className={`block w-full pl-10 pr-3 py-2 border ${
                     errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  } rounded-md focus:outline-none sm:text-sm`}
                   placeholder="John Doe"
                 />
               </div>
-              {errors.name && <p className="mt-1 text-lg text-red-500">{errors.name.message}</p>}
+              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
             </div>
 
             <div>
-              <label className="block text-lg font-medium text-gray-700">Email address</label>
+              <label className="block text-sm font-medium text-gray-700">Email address</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail className="h-5 w-5 text-gray-400" />
@@ -80,15 +80,15 @@ export const RegisterPage = () => {
                   {...register('email')}
                   className={`block w-full pl-10 pr-3 py-2 border ${
                     errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  } rounded-md focus:outline-none sm:text-sm`}
                   placeholder="you@example.com"
                 />
               </div>
-              {errors.email && <p className="mt-1 text-lg text-red-500">{errors.email.message}</p>}
+              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
             </div>
 
             <div>
-              <label className="block text-lg font-medium text-gray-700">Password</label>
+              <label className="block text-sm font-medium text-gray-700">Password</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -98,15 +98,15 @@ export const RegisterPage = () => {
                   {...register('password')}
                   className={`block w-full pl-10 pr-3 py-2 border ${
                     errors.password ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  } rounded-md focus:outline-none sm:text-sm`}
                   placeholder="••••••••"
                 />
               </div>
-              {errors.password && <p className="mt-1 text-lg text-red-500">{errors.password.message}</p>}
+              {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>}
             </div>
 
             <div>
-              <label className="block text-lg font-medium text-gray-700">Confirm Password</label>
+              <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -116,11 +116,11 @@ export const RegisterPage = () => {
                   {...register('confirmPassword')}
                   className={`block w-full pl-10 pr-3 py-2 border ${
                     errors.confirmPassword ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-gray-300 focus:ring-primary focus:border-primary'
-                  } rounded-md focus:outline-none sm:text-lg`}
+                  } rounded-md focus:outline-none sm:text-sm`}
                   placeholder="••••••••"
                 />
               </div>
-              {errors.confirmPassword && <p className="mt-1 text-lg text-red-500">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword.message}</p>}
             </div>
 
           </div>
@@ -129,12 +129,12 @@ export const RegisterPage = () => {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === 'loading' ? <Loader2 className="animate-spin h-5 w-5" /> : 'Register'}
             </button>
           </div>
-          <div className="text-lg text-center">
+          <div className="text-sm text-center">
             <Link to="/login" className="font-medium text-primary hover:text-primary-dark">
               Already have an account? Sign in
             </Link>

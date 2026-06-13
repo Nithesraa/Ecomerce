@@ -97,23 +97,23 @@ export const CheckoutPage = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-2">Street Address</label>
+                  <label className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-2">Street Address</label>
                   <input type="text" name="street" value={formData.street} onChange={handleChange} className="w-full h-14 px-4 bg-transparent border border-[#E2E8F0] dark:border-white/[0.2] focus:border-black dark:focus:border-white outline-none transition-colors" placeholder="123 Main St" required />
                 </div>
                 <div>
-                  <label className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-2">City</label>
+                  <label className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-2">City</label>
                   <input type="text" name="city" value={formData.city} onChange={handleChange} className="w-full h-14 px-4 bg-transparent border border-[#E2E8F0] dark:border-white/[0.2] focus:border-black dark:focus:border-white outline-none transition-colors" placeholder="New York" required />
                 </div>
                 <div>
-                  <label className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-2">State / Province</label>
+                  <label className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-2">State / Province</label>
                   <input type="text" name="state" value={formData.state} onChange={handleChange} className="w-full h-14 px-4 bg-transparent border border-[#E2E8F0] dark:border-white/[0.2] focus:border-black dark:focus:border-white outline-none transition-colors" placeholder="NY" required />
                 </div>
                 <div>
-                  <label className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-2">ZIP Code</label>
+                  <label className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-2">ZIP Code</label>
                   <input type="text" name="zipCode" value={formData.zipCode} onChange={handleChange} className="w-full h-14 px-4 bg-transparent border border-[#E2E8F0] dark:border-white/[0.2] focus:border-black dark:focus:border-white outline-none transition-colors" placeholder="10001" required />
                 </div>
                 <div>
-                  <label className="block text-[17px] font-bold tracking-widest text-gray-500 uppercase mb-2">Country</label>
+                  <label className="block text-[14px] font-bold tracking-widest text-gray-500 uppercase mb-2">Country</label>
                   <select name="country" value={formData.country} onChange={handleChange} className="w-full h-14 px-4 bg-transparent border border-[#E2E8F0] dark:border-white/[0.2] focus:border-black dark:focus:border-white outline-none transition-colors text-black dark:text-white">
                     <option value="United States" className="text-black">United States</option>
                     <option value="Canada" className="text-black">Canada</option>
@@ -153,7 +153,7 @@ export const CheckoutPage = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold uppercase tracking-widest text-[17px]">Pay Online (Stripe)</span>
+                      <span className="font-bold uppercase tracking-widest text-[14px]">Pay Online (Stripe)</span>
                       <div className="flex gap-1 opacity-80">
                         <div className="w-8 h-5 bg-[#6772E5] rounded flex items-center justify-center text-[10px] text-white font-bold">Stripe</div>
                         <div className="w-8 h-5 bg-blue-600 rounded"></div>
@@ -178,7 +178,7 @@ export const CheckoutPage = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold uppercase tracking-widest text-[17px]">Cash on Delivery</span>
+                      <span className="font-bold uppercase tracking-widest text-[14px]">Cash on Delivery</span>
                       <div className="flex gap-1 opacity-80">
                         <Truck className="w-6 h-6 text-gray-400" />
                       </div>
@@ -216,8 +216,8 @@ export const CheckoutPage = () => {
                       className="w-16 h-20 object-cover bg-gray-100 dark:bg-black"
                     />
                     <div className="flex-1 flex flex-col justify-center">
-                      <h4 className="font-bold text-[17px] leading-tight line-clamp-1 mb-1">{item.product?.title || 'Unknown Product'}</h4>
-                      <div className="flex justify-between text-[17px] text-gray-500">
+                      <h4 className="font-bold text-[14px] leading-tight line-clamp-1 mb-1">{item.product?.title || 'Unknown Product'}</h4>
+                      <div className="flex justify-between text-[14px] text-gray-500">
                         <span>Qty: {item.quantity}</span>
                         <span className="font-bold text-black dark:text-white">${item.price.toFixed(2)}</span>
                       </div>
@@ -235,12 +235,12 @@ export const CheckoutPage = () => {
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                   placeholder="PROMO CODE" 
-                  className="w-full h-12 px-4 bg-gray-50 dark:bg-black border border-[#E2E8F0] dark:border-white/[0.1] text-[18px] font-bold tracking-widest uppercase outline-none focus:border-black dark:focus:border-white transition-colors placeholder-gray-400"
+                  className="w-full h-12 px-4 bg-gray-50 dark:bg-black border border-[#E2E8F0] dark:border-white/[0.1] text-[15px] font-bold tracking-widest uppercase outline-none focus:border-black dark:focus:border-white transition-colors placeholder-gray-400"
                 />
                 <button 
                   type="submit"
                   disabled={loading}
-                  className="h-12 px-6 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[17px] hover:opacity-80 transition-opacity whitespace-nowrap disabled:opacity-50"
+                  className="h-12 px-6 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[14px] hover:opacity-80 transition-opacity whitespace-nowrap disabled:opacity-50"
                 >
                   Apply
                 </button>
@@ -255,26 +255,26 @@ export const CheckoutPage = () => {
                 </div>
               ) : checkoutSummary ? (
                 <div className="flex flex-col gap-4 mb-8">
-                  <div className="flex justify-between items-center text-[18px]">
-                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[17px]">Subtotal</span>
+                  <div className="flex justify-between items-center text-[15px]">
+                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[14px]">Subtotal</span>
                     <span className="font-black text-black dark:text-white">${checkoutSummary.subtotal.toFixed(2)}</span>
                   </div>
                   {checkoutSummary.discount > 0 && (
-                    <div className="flex justify-between items-center text-[18px]">
-                      <span className="font-bold text-red-500 uppercase tracking-widest text-[17px]">Discount</span>
+                    <div className="flex justify-between items-center text-[15px]">
+                      <span className="font-bold text-red-500 uppercase tracking-widest text-[14px]">Discount</span>
                       <span className="font-black text-red-500">-${checkoutSummary.discount.toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between items-center text-[18px]">
-                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[17px]">Shipping</span>
+                  <div className="flex justify-between items-center text-[15px]">
+                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[14px]">Shipping</span>
                     <span className="font-black text-black dark:text-white">{checkoutSummary.shipping === 0 ? 'FREE' : `$${checkoutSummary.shipping.toFixed(2)}`}</span>
                   </div>
-                  <div className="flex justify-between items-center text-[18px]">
-                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[17px]">Estimated Tax</span>
+                  <div className="flex justify-between items-center text-[15px]">
+                    <span className="font-bold text-gray-500 uppercase tracking-widest text-[14px]">Estimated Tax</span>
                     <span className="font-black text-black dark:text-white">${checkoutSummary.tax.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between items-center pt-6 border-t border-[#E2E8F0] dark:border-white/[0.1] mt-2">
-                    <span className="text-[18px] font-black uppercase tracking-widest text-black dark:text-white">Total</span>
+                    <span className="text-[15px] font-black uppercase tracking-widest text-black dark:text-white">Total</span>
                     <span className="text-[28px] font-black text-black dark:text-white">${checkoutSummary.finalTotal.toFixed(2)}</span>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export const CheckoutPage = () => {
               <button 
                 onClick={handlePlaceOrder}
                 disabled={loading || actionLoading || !checkoutSummary}
-                className="w-full h-16 bg-black dark:bg-white text-white dark:text-black font-black uppercase tracking-widest text-[18px] hover:opacity-80 transition-opacity flex items-center justify-center disabled:opacity-50"
+                className="w-full h-16 bg-black dark:bg-white text-white dark:text-black font-black uppercase tracking-widest text-[15px] hover:opacity-80 transition-opacity flex items-center justify-center disabled:opacity-50"
               >
                 {actionLoading ? 'Processing...' : 'Place Order'}
               </button>

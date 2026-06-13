@@ -38,9 +38,9 @@ export const PasswordStrengthMeter = ({ password }) => {
   return (
     <div className="mt-1 w-full">
       <div className="flex justify-between items-center mb-1">
-        <span className="text-lg text-muted font-medium">Password strength</span>
+        <span className="text-sm text-muted font-medium">Password strength</span>
         {password && (
-          <span className={`text-lg font-semibold ${strength > 2 ? 'text-emerald-500' : 'text-muted'}`}>
+          <span className={`text-sm font-semibold ${strength > 2 ? 'text-emerald-500' : 'text-muted'}`}>
             {getLabel(strength)}
           </span>
         )}

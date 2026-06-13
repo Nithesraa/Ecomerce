@@ -104,7 +104,7 @@ export const BuyerAuthPage = () => {
           <div className="w-9 h-9 bg-[#2563EB] rounded-[10px] flex items-center justify-center">
             <ShoppingBag className="w-[18px] h-[18px] text-white" />
           </div>
-          <span className="text-[18px] font-bold tracking-tight text-[#0F172A] dark:text-white transition-colors">ShopSphere</span>
+          <span className="text-[15px] font-bold tracking-tight text-[#0F172A] dark:text-white transition-colors">ShopSphere</span>
         </div>
 
         {/* ── main content (vertically centered) ── */}
@@ -120,7 +120,7 @@ export const BuyerAuthPage = () => {
                   <span className="block">Modern</span>
                   <span className="block text-[#2563EB]">Commerce.</span>
                 </h1>
-                <p className="mt-5 text-[17px] leading-relaxed font-medium text-[#64748B] dark:text-[#94A3B8] max-w-sm transition-colors">
+                <p className="mt-5 text-[14px] leading-relaxed font-medium text-[#64748B] dark:text-[#94A3B8] max-w-sm transition-colors">
                   Manage products, orders, and payments from a single platform.
                 </p>
               </div>
@@ -128,16 +128,16 @@ export const BuyerAuthPage = () => {
 
             {/* enterprise statement */}
             <div className="mt-10 pt-7 border-t border-[#E2E8F0] dark:border-white/[0.06] transition-colors">
-              <p className="text-[17px] font-bold uppercase tracking-[0.18em] text-[#334155] dark:text-[#64748B] mb-2">Enterprise Grade</p>
-              <p className="text-[18px] text-[#475569] dark:text-[#94A3B8] leading-relaxed transition-colors">
+              <p className="text-[14px] font-bold uppercase tracking-[0.18em] text-[#334155] dark:text-[#64748B] mb-2">Enterprise Grade</p>
+              <p className="text-[15px] text-[#475569] dark:text-[#94A3B8] leading-relaxed transition-colors">
                 Trusted by ambitious businesses building the future of commerce.
               </p>
             </div>
 
             {/* built for */}
             <div className="mt-8">
-              <p className="text-[17px] font-bold uppercase tracking-[0.18em] text-[#334155] dark:text-[#64748B] mb-3">Built for</p>
-              <div className="space-y-1.5 text-[18px] font-semibold">
+              <p className="text-[14px] font-bold uppercase tracking-[0.18em] text-[#334155] dark:text-[#64748B] mb-3">Built for</p>
+              <div className="space-y-1.5 text-[15px] font-semibold">
                 <p className="text-[#0F172A] dark:text-white transition-colors">Marketplace Owners</p>
                 <p className="text-[#334155] dark:text-white/70">Independent Sellers</p>
                 <p className="text-[#64748B] dark:text-white/50">Growing Brands</p>
@@ -150,7 +150,7 @@ export const BuyerAuthPage = () => {
 
         {/* copyright */}
         <div className="absolute bottom-6 left-10 xl:left-14 z-10">
-          <p className="text-[17px] text-[#94A3B8] dark:text-[#64748B] transition-colors">
+          <p className="text-[14px] text-[#94A3B8] dark:text-[#64748B] transition-colors">
             © {new Date().getFullYear()} ShopSphere, Inc. All rights reserved.
           </p>
         </div>
@@ -171,7 +171,7 @@ export const BuyerAuthPage = () => {
           <div className="w-8 h-8 bg-[#2563EB] rounded-lg flex items-center justify-center">
             <ShoppingBag className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-[17px] tracking-tight text-[#0F172A] dark:text-white">ShopSphere</span>
+          <span className="font-bold text-[14px] tracking-tight text-[#0F172A] dark:text-white">ShopSphere</span>
         </div>
 
         {/* ── premium auth card ── */}
@@ -189,15 +189,15 @@ export const BuyerAuthPage = () => {
 
                 <div className="mb-6">
                   <h2 className="text-[24px] font-bold tracking-tight text-[#0F172A] dark:text-white mb-1">Welcome back</h2>
-                  <p className="text-[18px] text-[#64748B] dark:text-[#94A3B8]">Sign in to continue to your account.</p>
+                  <p className="text-[15px] text-[#64748B] dark:text-[#94A3B8]">Sign in to continue to your account.</p>
                 </div>
 
                 {/* social */}
                 <div className="grid grid-cols-2 gap-3 mb-5">
-                  <button type="button" onClick={() => toast('Google sign-in coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2.5 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[17px] font-semibold text-[#0F172A] dark:text-white">
+                  <button type="button" onClick={() => toast('Google sign-in coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2.5 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[14px] font-semibold text-[#0F172A] dark:text-white">
                     <GoogleIcon /> Google
                   </button>
-                  <button type="button" onClick={() => toast('Apple sign-in coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[17px] font-semibold text-[#0F172A] dark:text-white">
+                  <button type="button" onClick={() => toast('Apple sign-in coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[14px] font-semibold text-[#0F172A] dark:text-white">
                     <AppleIcon /> Apple
                   </button>
                 </div>
@@ -205,7 +205,7 @@ export const BuyerAuthPage = () => {
                 {/* divider */}
                 <div className="flex items-center gap-3 my-5">
                   <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-white/[0.06]" />
-                  <span className="text-[17px] font-bold uppercase tracking-[0.15em] text-[#94A3B8]">Or</span>
+                  <span className="text-[14px] font-bold uppercase tracking-[0.15em] text-[#94A3B8]">Or</span>
                   <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-white/[0.06]" />
                 </div>
 
@@ -217,23 +217,23 @@ export const BuyerAuthPage = () => {
                   <div className="flex justify-between items-center mb-4">
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input type="checkbox" className="w-4 h-4 rounded border-[#E2E8F0] text-[#2563EB] focus:ring-[#2563EB] dark:border-white/[0.15] dark:bg-black" />
-                      <span className="text-[17px] text-[#64748B] dark:text-[#94A3B8] font-medium">Remember me</span>
+                      <span className="text-[14px] text-[#64748B] dark:text-[#94A3B8] font-medium">Remember me</span>
                     </label>
-                    <a href="#" className="text-[17px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] transition-colors">Forgot password?</a>
+                    <a href="#" className="text-[14px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] transition-colors">Forgot password?</a>
                   </div>
 
                   <button type="submit" disabled={loading}
-                    className="w-full h-[44px] rounded-lg text-[18px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] focus:outline-none focus:ring-[3px] focus:ring-[#2563EB]/20 disabled:opacity-50 transition-colors shadow-sm">
+                    className="w-full h-[44px] rounded-lg text-[15px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] focus:outline-none focus:ring-[3px] focus:ring-[#2563EB]/20 disabled:opacity-50 transition-colors shadow-sm">
                     {loading ? <Loader2 className="animate-spin h-4 w-4 mx-auto" /> : 'Sign in'}
                   </button>
                 </form>
 
                 <div className="mt-5 text-center flex flex-col gap-2">
-                  <p className="text-[17px] text-[#64748B] dark:text-[#94A3B8]">
+                  <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8]">
                     Don't have an account?{' '}
                     <button onClick={toggleMode} className="font-semibold text-[#2563EB] hover:text-[#1D4ED8] transition-colors">Create account</button>
                   </p>
-                  <p className="text-[17px] text-[#64748B] dark:text-[#94A3B8]">
+                  <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8]">
                     Are you a business?{' '}
                     <button onClick={() => navigate('/seller/login')} className="font-semibold text-purple-600 hover:text-purple-700 transition-colors">Go to Seller Portal</button>
                   </p>
@@ -251,15 +251,15 @@ export const BuyerAuthPage = () => {
 
                 <div className="mb-6">
                   <h2 className="text-[24px] font-bold tracking-tight text-[#0F172A] dark:text-white mb-1">Create your account</h2>
-                  <p className="text-[18px] text-[#64748B] dark:text-[#94A3B8]">Start selling, managing products, and growing your business.</p>
+                  <p className="text-[15px] text-[#64748B] dark:text-[#94A3B8]">Start selling, managing products, and growing your business.</p>
                 </div>
 
                 {/* social */}
                 <div className="grid grid-cols-2 gap-3 mb-5">
-                  <button type="button" onClick={() => toast('Google sign-up coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2.5 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[17px] font-semibold text-[#0F172A] dark:text-white">
+                  <button type="button" onClick={() => toast('Google sign-up coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2.5 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[14px] font-semibold text-[#0F172A] dark:text-white">
                     <GoogleIcon /> Google
                   </button>
-                  <button type="button" onClick={() => toast('Apple sign-up coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[17px] font-semibold text-[#0F172A] dark:text-white">
+                  <button type="button" onClick={() => toast('Apple sign-up coming soon!', { icon: '🚀' })} className="flex items-center justify-center gap-2 h-[42px] border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg bg-white dark:bg-black hover:bg-slate-50 dark:hover:bg-[#111] transition-colors text-[14px] font-semibold text-[#0F172A] dark:text-white">
                     <AppleIcon /> Apple
                   </button>
                 </div>
@@ -267,7 +267,7 @@ export const BuyerAuthPage = () => {
                 {/* divider */}
                 <div className="flex items-center gap-3 my-5">
                   <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-white/[0.06]" />
-                  <span className="text-[17px] font-bold uppercase tracking-[0.15em] text-[#94A3B8]">Or</span>
+                  <span className="text-[14px] font-bold uppercase tracking-[0.15em] text-[#94A3B8]">Or</span>
                   <div className="flex-1 h-px bg-[#E2E8F0] dark:bg-white/[0.06]" />
                 </div>
 
@@ -279,18 +279,18 @@ export const BuyerAuthPage = () => {
 
                   <div className="mt-1">
                     <button type="submit" disabled={loading}
-                      className="w-full h-[44px] rounded-lg text-[18px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] focus:outline-none focus:ring-[3px] focus:ring-[#2563EB]/20 disabled:opacity-50 transition-colors shadow-sm">
+                      className="w-full h-[44px] rounded-lg text-[15px] font-semibold text-white bg-[#2563EB] hover:bg-[#1D4ED8] focus:outline-none focus:ring-[3px] focus:ring-[#2563EB]/20 disabled:opacity-50 transition-colors shadow-sm">
                       {loading ? <Loader2 className="animate-spin h-4 w-4 mx-auto" /> : 'Create account'}
                     </button>
                   </div>
                 </form>
 
                 <div className="mt-5 text-center flex flex-col gap-2">
-                  <p className="text-[17px] text-[#64748B] dark:text-[#94A3B8]">
+                  <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8]">
                     Already have an account?{' '}
                     <button onClick={toggleMode} className="font-semibold text-[#2563EB] hover:text-[#1D4ED8] transition-colors">Sign in</button>
                   </p>
-                  <p className="text-[17px] text-[#64748B] dark:text-[#94A3B8]">
+                  <p className="text-[14px] text-[#64748B] dark:text-[#94A3B8]">
                     Want to sell on ShopSphere?{' '}
                     <button onClick={() => navigate('/seller/register')} className="font-semibold text-purple-600 hover:text-purple-700 transition-colors">Become a Partner</button>
                   </p>
@@ -303,7 +303,7 @@ export const BuyerAuthPage = () => {
         {/* trust line */}
         <div className="absolute bottom-5 flex items-center gap-1.5 z-10">
           <Lock className="w-3.5 h-3.5 text-[#94A3B8]" />
-          <p className="text-[18px] font-medium text-[#94A3B8]">Protected by industry-standard security and encryption.</p>
+          <p className="text-[15px] font-medium text-[#94A3B8]">Protected by industry-standard security and encryption.</p>
         </div>
       </div>
     </div>

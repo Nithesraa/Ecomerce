@@ -64,12 +64,12 @@ export const CategoryManagement = () => {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Categories</h1>
+          <h1 className="text-xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Categories</h1>
           <p className="text-gray-500 mt-1">Organize your products into collections.</p>
         </div>
         <button 
           onClick={() => setShowModal(true)}
-          className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-lg flex items-center gap-2 hover:opacity-80 transition-opacity whitespace-nowrap"
+          className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-sm flex items-center gap-2 hover:opacity-80 transition-opacity whitespace-nowrap"
         >
           <Plus className="w-4 h-4" /> Create Category
         </button>
@@ -88,8 +88,8 @@ export const CategoryManagement = () => {
                   <Tag className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-black text-xl tracking-widest text-black dark:text-white uppercase">{category.name}</h3>
-                  <p className="text-[18px] font-bold uppercase tracking-widest text-gray-400">
+                  <h3 className="font-black text-base tracking-widest text-black dark:text-white uppercase">{category.name}</h3>
+                  <p className="text-[15px] font-bold uppercase tracking-widest text-gray-400">
                     /{category.slug}
                   </p>
                 </div>
@@ -110,7 +110,7 @@ export const CategoryManagement = () => {
                   </button>
                 </div>
               </div>
-              <p className="text-lg text-gray-500 line-clamp-2 mt-4">
+              <p className="text-sm text-gray-500 line-clamp-2 mt-4">
                 {category.description || 'No description provided.'}
               </p>
             </div>
@@ -121,19 +121,19 @@ export const CategoryManagement = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white dark:bg-[#111] rounded-2xl w-full max-w-md p-6 border border-gray-200 dark:border-white/[0.05]">
-            <h2 className="text-xl font-black uppercase tracking-tight mb-6">{editingCategory ? 'Edit Category' : 'Create New Category'}</h2>
+            <h2 className="text-base font-black uppercase tracking-tight mb-6">{editingCategory ? 'Edit Category' : 'Create New Category'}</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-lg font-bold text-gray-500 uppercase tracking-widest mb-1">Category Name</label>
-                <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-xl p-3 text-lg focus:ring-2 focus:ring-blue-500" placeholder="e.g. Electronics" />
+                <label className="block text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">Category Name</label>
+                <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500" placeholder="e.g. Electronics" />
               </div>
               <div>
-                <label className="block text-lg font-bold text-gray-500 uppercase tracking-widest mb-1">Description</label>
-                <textarea rows="3" required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-xl p-3 text-lg focus:ring-2 focus:ring-blue-500" placeholder="Category description..." />
+                <label className="block text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">Description</label>
+                <textarea rows="3" required value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-blue-500" placeholder="Category description..." />
               </div>
               <div className="flex gap-4 pt-4">
-                <button type="button" onClick={handleCloseModal} className="flex-1 px-4 py-3 bg-gray-100 dark:bg-white/[0.05] rounded-xl font-bold uppercase tracking-widest text-lg hover:bg-gray-200 transition-colors">Cancel</button>
-                <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-3 bg-black text-white dark:bg-white dark:text-black rounded-xl font-bold uppercase tracking-widest text-lg hover:opacity-80 transition-opacity disabled:opacity-50">
+                <button type="button" onClick={handleCloseModal} className="flex-1 px-4 py-3 bg-gray-100 dark:bg-white/[0.05] rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors">Cancel</button>
+                <button type="submit" disabled={isSubmitting} className="flex-1 px-4 py-3 bg-black text-white dark:bg-white dark:text-black rounded-xl font-bold uppercase tracking-widest text-sm hover:opacity-80 transition-opacity disabled:opacity-50">
                   {isSubmitting ? 'Saving...' : (editingCategory ? 'Update' : 'Create')}
                 </button>
               </div>

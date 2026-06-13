@@ -38,9 +38,9 @@ export const FloatingLabelInput = React.forwardRef(({
         />
         <label
           className={cn(
-            "absolute text-lg text-muted transition-all duration-200 pointer-events-none",
-            "peer-placeholder-shown:text-lg peer-placeholder-shown:top-3",
-            "-top-2.5 bg-surface px-1 left-2 text-lg",
+            "absolute text-sm text-muted transition-all duration-200 pointer-events-none",
+            "peer-placeholder-shown:text-sm peer-placeholder-shown:top-3",
+            "-top-2.5 bg-surface px-1 left-2 text-sm",
             Icon && "peer-placeholder-shown:left-10 left-9",
             error && "text-red-500"
           )}
@@ -60,7 +60,7 @@ export const FloatingLabelInput = React.forwardRef(({
         )}
       </div>
       {error && (
-        <p className="absolute -bottom-5 left-1 text-lg text-red-500 font-medium">
+        <p className="absolute -bottom-5 left-1 text-sm text-red-500 font-medium">
           {error}
         </p>
       )}

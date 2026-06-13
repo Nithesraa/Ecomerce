@@ -44,7 +44,7 @@ export const DashboardOverview = () => {
   return (
     <div className="flex flex-col gap-8">
       <div>
-        <h1 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Overview</h1>
+        <h1 className="text-xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Overview</h1>
         <p className="text-gray-500 mt-1">Welcome back. Here's what's happening with your store today.</p>
       </div>
 
@@ -58,12 +58,12 @@ export const DashboardOverview = () => {
                 <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/[0.05] flex items-center justify-center">
                   <Icon className="w-5 h-5 text-gray-900 dark:text-white" />
                 </div>
-                <span className="text-lg font-bold text-green-500 bg-green-50 dark:bg-green-500/10 px-2 py-1 rounded-full">
+                <span className="text-sm font-bold text-green-500 bg-green-50 dark:bg-green-500/10 px-2 py-1 rounded-full">
                   {stat.trend}
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-gray-500 uppercase tracking-widest">{stat.name}</h3>
-              <p className="text-3xl font-black text-gray-900 dark:text-white mt-1">{stat.value}</p>
+              <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest">{stat.name}</h3>
+              <p className="text-xl font-black text-gray-900 dark:text-white mt-1">{stat.value}</p>
             </div>
           );
         })}
@@ -76,7 +76,7 @@ export const DashboardOverview = () => {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <Percent className="w-6 h-6" />
-                <h3 className="text-lg font-bold uppercase tracking-widest text-white/80">Conversion Rate</h3>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-white/80">Conversion Rate</h3>
               </div>
               <p className="text-[60px] font-black leading-none mb-2">{metrics.conversionRate}%</p>
               <p className="text-sm font-bold tracking-wider text-white/70">From {metrics.viewCount} views to {metrics.purchaseCount} purchases</p>
@@ -89,7 +89,7 @@ export const DashboardOverview = () => {
           <div className="lg:col-span-1 bg-white dark:bg-[#111] p-6 border border-gray-200 dark:border-white/[0.05] rounded-2xl shadow-sm">
             <div className="flex items-center gap-2 mb-6">
               <Eye className="w-5 h-5 text-blue-500" />
-              <h3 className="text-lg font-bold text-gray-500 uppercase tracking-widest">Top Viewed Products</h3>
+              <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest">Top Viewed Products</h3>
             </div>
             <div className="flex flex-col gap-4">
               {metrics.topViewed.length === 0 && <p className="text-sm text-gray-400">No views recorded yet.</p>}
@@ -105,7 +105,7 @@ export const DashboardOverview = () => {
           <div className="lg:col-span-1 bg-white dark:bg-[#111] p-6 border border-gray-200 dark:border-white/[0.05] rounded-2xl shadow-sm">
             <div className="flex items-center gap-2 mb-6">
               <MousePointerClick className="w-5 h-5 text-green-500" />
-              <h3 className="text-lg font-bold text-gray-500 uppercase tracking-widest">Most Added to Cart</h3>
+              <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest">Most Added to Cart</h3>
             </div>
             <div className="flex flex-col gap-4">
               {metrics.topCarted.length === 0 && <p className="text-sm text-gray-400">No cart additions yet.</p>}
@@ -122,7 +122,7 @@ export const DashboardOverview = () => {
 
       {/* Chart Section */}
       <div className="bg-white dark:bg-[#111] p-6 border border-gray-200 dark:border-white/[0.05] rounded-2xl shadow-sm h-[400px]">
-        <h3 className="text-lg font-bold text-gray-500 uppercase tracking-widest mb-6">Revenue Over Time</h3>
+        <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Revenue Over Time</h3>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" opacity={0.1} />

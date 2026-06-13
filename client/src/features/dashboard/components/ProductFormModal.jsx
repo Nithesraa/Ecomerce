@@ -158,7 +158,7 @@ export const ProductFormModal = ({ isOpen, onClose, existingProduct }) => {
         >
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-white/[0.05]">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">
+            <h2 className="text-base font-bold text-gray-900 dark:text-white uppercase tracking-tight">
               {existingProduct ? 'Edit Product' : 'Add New Product'}
             </h2>
             <button onClick={onClose} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-white/10">
@@ -172,61 +172,61 @@ export const ProductFormModal = ({ isOpen, onClose, existingProduct }) => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Product Title</label>
-                  <input {...register('title')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="e.g. Classic White Sneakers" />
-                  {errors.title && <p className="text-red-500 text-lg mt-1">{errors.title.message}</p>}
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Product Title</label>
+                  <input {...register('title')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="e.g. Classic White Sneakers" />
+                  {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
                 </div>
 
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Description</label>
-                  <textarea {...register('description')} rows={4} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none resize-none" placeholder="Product description..." />
-                  {errors.description && <p className="text-red-500 text-lg mt-1">{errors.description.message}</p>}
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Description</label>
+                  <textarea {...register('description')} rows={4} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none resize-none" placeholder="Product description..." />
+                  {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Price ($)</label>
-                  <input type="number" step="0.01" {...register('price')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0.00" />
-                  {errors.price && <p className="text-red-500 text-lg mt-1">{errors.price.message}</p>}
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Price ($)</label>
+                  <input type="number" step="0.01" {...register('price')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0.00" />
+                  {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Discount (%)</label>
-                  <input type="number" {...register('discountPercentage')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0" />
-                  {errors.discountPercentage && <p className="text-red-500 text-lg mt-1">{errors.discountPercentage.message}</p>}
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Discount (%)</label>
+                  <input type="number" {...register('discountPercentage')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0" />
+                  {errors.discountPercentage && <p className="text-red-500 text-sm mt-1">{errors.discountPercentage.message}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Stock</label>
-                  <input type="number" {...register('stock')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0" />
-                  {errors.stock && <p className="text-red-500 text-lg mt-1">{errors.stock.message}</p>}
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Stock</label>
+                  <input type="number" {...register('stock')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none" placeholder="0" />
+                  {errors.stock && <p className="text-red-500 text-sm mt-1">{errors.stock.message}</p>}
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Status</label>
-                  <select {...register('status')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none">
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Status</label>
+                  <select {...register('status')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none">
                     <option value="DRAFT">Draft</option>
                     <option value="ACTIVE">Active</option>
                     <option value="ARCHIVED">Archived</option>
                   </select>
-                  {errors.status && <p className="text-red-500 text-lg mt-1">{errors.status.message}</p>}
+                  {errors.status && <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>}
                 </div>
 
                 <div className="space-y-1 sm:col-span-2">
-                  <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Category</label>
-                  <select {...register('category')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white outline-none">
+                  <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Category</label>
+                  <select {...register('category')} className="w-full bg-gray-50 dark:bg-[#222] border border-gray-200 dark:border-white/[0.05] rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white outline-none">
                     <option value="">Select Category</option>
                     {categories.map(cat => (
                       <option key={cat._id} value={cat._id}>{cat.name}</option>
                     ))}
                   </select>
-                  {errors.category && <p className="text-red-500 text-lg mt-1">{errors.category.message}</p>}
+                  {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category.message}</p>}
                 </div>
 
                 {/* Images Section */}
                 <div className="space-y-3 sm:col-span-2 mt-2">
                   <div className="flex justify-between items-center">
-                    <label className="text-lg font-bold text-gray-500 uppercase tracking-widest">Product Images</label>
-                    <span className="text-lg text-gray-400">{existingImages.length + selectedFiles.length} / 5 max</span>
+                    <label className="text-sm font-bold text-gray-500 uppercase tracking-widest">Product Images</label>
+                    <span className="text-sm text-gray-400">{existingImages.length + selectedFiles.length} / 5 max</span>
                   </div>
                   
                   <div className="grid grid-cols-5 gap-3">
@@ -262,7 +262,7 @@ export const ProductFormModal = ({ isOpen, onClose, existingProduct }) => {
                         className="aspect-square rounded-lg border-2 border-dashed border-gray-300 dark:border-white/[0.1] flex flex-col items-center justify-center text-gray-400 hover:text-blue-500 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-colors"
                       >
                         <Upload className="w-6 h-6 mb-1" />
-                        <span className="text-[18px] font-bold uppercase">Upload</span>
+                        <span className="text-[15px] font-bold uppercase">Upload</span>
                       </button>
                     )}
                   </div>
@@ -286,7 +286,7 @@ export const ProductFormModal = ({ isOpen, onClose, existingProduct }) => {
               type="button" 
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-5 py-2.5 rounded-xl text-lg font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors"
+              className="px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors"
             >
               Cancel
             </button>
@@ -294,7 +294,7 @@ export const ProductFormModal = ({ isOpen, onClose, existingProduct }) => {
               type="submit" 
               form="product-form"
               disabled={isSubmitting}
-              className="px-6 py-2.5 rounded-xl text-lg font-bold uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-70 flex items-center justify-center min-w-[120px] transition-colors shadow-lg shadow-blue-500/20"
+              className="px-6 py-2.5 rounded-xl text-sm font-bold uppercase tracking-widest text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-70 flex items-center justify-center min-w-[120px] transition-colors shadow-lg shadow-blue-500/20"
             >
               {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Save Product'}
             </button>

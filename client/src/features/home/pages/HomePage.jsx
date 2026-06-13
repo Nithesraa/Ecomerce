@@ -66,13 +66,13 @@ export const HomePage = () => {
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
             <Link 
               to="/products?search=men"
-              className="w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest text-[18px] hover:bg-gray-200 transition-colors"
+              className="w-full sm:w-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest text-[15px] hover:bg-gray-200 transition-colors"
             >
               Shop Men
             </Link>
             <Link 
               to="/products?search=women"
-              className="w-full sm:w-auto px-10 py-4 bg-black text-white font-bold uppercase tracking-widest text-[18px] hover:bg-gray-900 transition-colors"
+              className="w-full sm:w-auto px-10 py-4 bg-black text-white font-bold uppercase tracking-widest text-[15px] hover:bg-gray-900 transition-colors"
             >
               Shop Women
             </Link>

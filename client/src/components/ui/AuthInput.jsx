@@ -20,7 +20,7 @@ export const AuthInput = React.forwardRef(({
             "bg-white dark:bg-[#111]",
             "border border-[#E2E8F0] dark:border-white/[0.08] rounded-lg",
             "outline-none transition-all duration-200",
-            "text-[18px] font-medium text-black dark:text-white",
+            "text-[15px] font-medium text-black dark:text-white",
             "focus:border-[#2563EB] focus:ring-[3px] focus:ring-[#2563EB]/8 dark:focus:ring-[#2563EB]/15",
             "hover:border-slate-300 dark:hover:border-white/15",
             isPw && "pr-11",
@@ -30,7 +30,7 @@ export const AuthInput = React.forwardRef(({
           {...props}
         />
         <label className={cn(
-          "absolute left-3.5 top-[14px] text-[18px] text-[#64748B] dark:text-[#94A3B8]",
+          "absolute left-3.5 top-[14px] text-[15px] text-[#64748B] dark:text-[#94A3B8]",
           "transition-all duration-200 pointer-events-none origin-left",
           "peer-focus:-translate-y-[10px] peer-focus:scale-[0.78] peer-focus:text-[#2563EB] peer-focus:font-semibold",
           "peer-not-placeholder-shown:-translate-y-[10px] peer-not-placeholder-shown:scale-[0.78]",
@@ -48,7 +48,7 @@ export const AuthInput = React.forwardRef(({
         )}
       </div>
       <div className="h-4 mt-0.5 pl-0.5">
-        {error && <p className="text-[18px] text-red-500 font-medium leading-4">{error}</p>}
+        {error && <p className="text-[15px] text-red-500 font-medium leading-4">{error}</p>}
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ export const OrderManagement = () => {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white uppercase">
+          <h1 className="text-xl font-black tracking-tight text-gray-900 dark:text-white uppercase">
             {isSeller ? 'Order Items' : 'Orders'}
           </h1>
           <p className="text-gray-500 mt-1">
@@ -69,7 +69,7 @@ export const OrderManagement = () => {
               placeholder={isSeller ? "Search by Item ID, Product, or Customer..." : "Search by Order ID or Address..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg pl-10 pr-4 py-2.5 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white"
+              className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
         </div>
@@ -80,21 +80,21 @@ export const OrderManagement = () => {
               <tr className="bg-gray-50 dark:bg-white/[0.02] border-b border-gray-200 dark:border-white/[0.05]">
                 {isSeller ? (
                   <>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Item / Order ID</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Product</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Customer</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Qty & Price</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Status</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest text-right">Action</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Item / Order ID</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Product</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Customer</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Qty & Price</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Status</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest text-right">Action</th>
                   </>
                 ) : (
                   <>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Order ID</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Date</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Customer / Address</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Total</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Status</th>
-                    <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest text-right">Action</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Order ID</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Date</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Customer / Address</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Total</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Status</th>
+                    <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest text-right">Action</th>
                   </>
                 )}
               </tr>
@@ -117,7 +117,7 @@ export const OrderManagement = () => {
                     {isSeller ? (
                       // SELLER VIEW
                       <>
-                        <td className="p-4 text-lg font-mono text-gray-900 dark:text-white">
+                        <td className="p-4 text-sm font-mono text-gray-900 dark:text-white">
                           <div><span className="text-sm text-gray-400">Item:</span> #{item._id.slice(-6).toUpperCase()}</div>
                           <div><span className="text-sm text-gray-400">Ord:</span> #{item.order?._id?.slice(-6).toUpperCase()}</div>
                         </td>
@@ -128,17 +128,17 @@ export const OrderManagement = () => {
                               alt="product" 
                               className="w-10 h-10 rounded-lg object-cover bg-gray-100"
                             />
-                            <span className="text-lg font-medium text-gray-900 dark:text-white max-w-[200px] truncate">
+                            <span className="text-sm font-medium text-gray-900 dark:text-white max-w-[200px] truncate">
                               {item.productTitle}
                             </span>
                           </div>
                         </td>
                         <td className="p-4">
-                          <div className="text-lg font-bold text-gray-900 dark:text-white">{item.order?.user?.name || 'Guest'}</div>
+                          <div className="text-sm font-bold text-gray-900 dark:text-white">{item.order?.user?.name || 'Guest'}</div>
                           <div className="text-sm text-gray-500">{item.order?.user?.email}</div>
                         </td>
                         <td className="p-4">
-                          <div className="text-lg font-bold text-gray-900 dark:text-white">{item.quantity}x</div>
+                          <div className="text-sm font-bold text-gray-900 dark:text-white">{item.quantity}x</div>
                           <div className="text-sm text-gray-500">${(item.priceAtPurchase || 0).toFixed(2)}</div>
                         </td>
                         <td className="p-4">
@@ -170,23 +170,23 @@ export const OrderManagement = () => {
                     ) : (
                       // ADMIN VIEW
                       <>
-                        <td className="p-4 text-lg font-mono text-gray-900 dark:text-white">
+                        <td className="p-4 text-sm font-mono text-gray-900 dark:text-white">
                           #{item._id.slice(-6).toUpperCase()}
                         </td>
-                        <td className="p-4 text-lg text-gray-500">
+                        <td className="p-4 text-sm text-gray-500">
                           {format(new Date(item.createdAt), 'MMM d, yyyy')}
                         </td>
                         <td className="p-4">
                           <div className="flex flex-col">
-                            <span className="text-lg font-bold text-gray-900 dark:text-white">
+                            <span className="text-sm font-bold text-gray-900 dark:text-white">
                               {item.user?.name || 'Guest'}
                             </span>
-                            <span className="text-lg text-gray-500">
+                            <span className="text-sm text-gray-500">
                               {item.shippingAddress?.city}, {item.shippingAddress?.country}
                             </span>
                           </div>
                         </td>
-                        <td className="p-4 text-lg font-bold text-gray-900 dark:text-white">
+                        <td className="p-4 text-sm font-bold text-gray-900 dark:text-white">
                           ${(item.totalAmount || 0).toFixed(2)}
                         </td>
                         <td className="p-4">

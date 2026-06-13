@@ -75,7 +75,7 @@ export const SearchModal = ({ isOpen, onClose }) => {
             </button>
           </form>
           
-          <div className="mt-12 flex gap-4 text-[17px] font-bold tracking-widest uppercase text-gray-500">
+          <div className="mt-12 flex gap-4 text-[14px] font-bold tracking-widest uppercase text-gray-500">
             <span>Popular:</span>
             <button onClick={() => { setQuery('jacket'); handleSubmit({ preventDefault: () => {} }); }} className="hover:text-black dark:hover:text-white transition-colors">Jacket</button>
             <button onClick={() => { setQuery('shoes'); handleSubmit({ preventDefault: () => {} }); }} className="hover:text-black dark:hover:text-white transition-colors">Shoes</button>

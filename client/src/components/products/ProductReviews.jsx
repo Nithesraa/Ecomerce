@@ -74,7 +74,7 @@ export const ProductReviews = ({ product }) => {
     <div className="mt-16 pt-10 border-t border-gray-200 dark:border-white/10">
       <div className="flex items-center gap-3 mb-8">
         <MessageSquare className="w-8 h-8 text-black dark:text-white" />
-        <h2 className="text-3xl font-black uppercase tracking-tight text-black dark:text-white">Customer Reviews</h2>
+        <h2 className="text-xl font-black uppercase tracking-tight text-black dark:text-white">Customer Reviews</h2>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -84,18 +84,18 @@ export const ProductReviews = ({ product }) => {
           {/* Summary Card */}
           <div className="bg-gray-50 dark:bg-[#111] p-6 rounded-2xl border border-gray-200 dark:border-white/10">
             <div className="flex items-end gap-3 mb-2">
-              <span className="text-5xl font-black text-black dark:text-white">
+              <span className="text-3xl font-black text-black dark:text-white">
                 {product?.averageRating ? product.averageRating.toFixed(1) : '0.0'}
               </span>
               <div className="pb-1">
                 <RatingStars rating={Math.round(product?.averageRating || 0)} />
               </div>
             </div>
-            <p className="text-gray-500 text-lg font-medium mb-6">Based on {product?.reviewCount || 0} reviews</p>
+            <p className="text-gray-500 text-sm font-medium mb-6">Based on {product?.reviewCount || 0} reviews</p>
 
             <div className="flex flex-col gap-3">
               {distribution.map((dist) => (
-                <div key={dist.stars} className="flex items-center gap-3 text-lg">
+                <div key={dist.stars} className="flex items-center gap-3 text-sm">
                   <div className="w-12 font-medium text-gray-700 dark:text-gray-300 flex items-center gap-1">
                     {dist.stars} <Star className="w-3 h-3 fill-current" />
                   </div>
@@ -105,7 +105,7 @@ export const ProductReviews = ({ product }) => {
                       style={{ width: `${calculatePercentage(dist.count)}%` }}
                     />
                   </div>
-                  <div className="w-10 text-right text-gray-500 font-mono text-lg">{dist.count}</div>
+                  <div className="w-10 text-right text-gray-500 font-mono text-sm">{dist.count}</div>
                 </div>
               ))}
             </div>
@@ -118,11 +118,11 @@ export const ProductReviews = ({ product }) => {
         {/* Right Column: Reviews List */}
         <div className="lg:col-span-8">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="font-bold text-lg text-black dark:text-white">Showing {reviews.length} of {totalReviews} reviews</h3>
+            <h3 className="font-bold text-sm text-black dark:text-white">Showing {reviews.length} of {totalReviews} reviews</h3>
             <select 
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-white/10 rounded-lg px-3 py-2 text-lg text-black dark:text-white focus:outline-none"
+              className="bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-white/10 rounded-lg px-3 py-2 text-sm text-black dark:text-white focus:outline-none"
             >
               <option value="newest">Most Recent</option>
               <option value="highest">Highest Rating</option>
@@ -144,41 +144,41 @@ export const ProductReviews = ({ product }) => {
                         {review.user?.firstName?.charAt(0) || 'A'}
                       </div>
                       <div>
-                        <div className="font-bold text-lg text-black dark:text-white">
+                        <div className="font-bold text-sm text-black dark:text-white">
                           {review.user?.firstName} {review.user?.lastName}
                         </div>
                         <div className="flex items-center gap-2 mt-1">
                           <RatingStars rating={review.rating} />
                           {review.isVerifiedPurchase && (
-                            <span className="text-[18px] uppercase tracking-wider font-bold text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-500/10 px-2 py-0.5 rounded-full">
+                            <span className="text-[15px] uppercase tracking-wider font-bold text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-500/10 px-2 py-0.5 rounded-full">
                               Verified Purchase
                             </span>
                           )}
                         </div>
                       </div>
                     </div>
-                    <div className="text-lg text-gray-400 font-medium">
+                    <div className="text-sm text-gray-400 font-medium">
                       {format(new Date(review.createdAt), 'MMM d, yyyy')}
                     </div>
                   </div>
                   
                   {review.comment && (
-                    <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mt-3">
+                    <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mt-3">
                       {review.comment}
                     </p>
                   )}
 
                   <div className="flex items-center gap-4 mt-4">
-                    <button className="text-lg font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1.5">
+                    <button className="text-sm font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1.5">
                       <ThumbsUp className="w-3.5 h-3.5" />
                       Helpful ({review.helpfulVotes || 0})
                     </button>
                     {user && user._id === review.user?._id && (
                       <div className="flex items-center gap-3 ml-auto">
-                        <button className="text-lg font-medium text-gray-400 hover:text-blue-500 transition-colors flex items-center gap-1">
+                        <button className="text-sm font-medium text-gray-400 hover:text-blue-500 transition-colors flex items-center gap-1">
                           <Edit2 className="w-3.5 h-3.5" /> Edit
                         </button>
-                        <button className="text-lg font-medium text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1">
+                        <button className="text-sm font-medium text-gray-400 hover:text-red-500 transition-colors flex items-center gap-1">
                           <Trash2 className="w-3.5 h-3.5" /> Delete
                         </button>
                       </div>

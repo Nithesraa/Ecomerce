@@ -80,7 +80,7 @@ export const QuickViewModal = ({ product, onClose }) => {
 
           {/* Content */}
           <div className="w-full md:w-1/2 p-10 flex flex-col justify-center overflow-y-auto">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-[#fafafa] mb-3 tracking-tight">
+            <h2 className="text-lg lg:text-xl font-bold text-gray-900 dark:text-[#fafafa] mb-3 tracking-tight">
               {product.title}
             </h2>
             
@@ -91,13 +91,13 @@ export const QuickViewModal = ({ product, onClose }) => {
                 ${product.price.toFixed(2)}
               </span>
               {product.discountPercentage > 0 && (
-                <span className="px-2 py-1 text-[17px] font-bold text-gray-900 dark:text-gray-900 bg-gray-200 dark:bg-white rounded-md tracking-wider">
+                <span className="px-2 py-1 text-[14px] font-bold text-gray-900 dark:text-gray-900 bg-gray-200 dark:bg-white rounded-md tracking-wider">
                   {product.discountPercentage}% OFF
                 </span>
               )}
             </div>
 
-            <p className="text-gray-600 dark:text-gray-400 text-[17px] leading-relaxed mb-10 line-clamp-4">
+            <p className="text-gray-600 dark:text-gray-400 text-[14px] leading-relaxed mb-10 line-clamp-4">
               {product.description}
             </p>
 
@@ -119,7 +119,7 @@ export const QuickViewModal = ({ product, onClose }) => {
             
             <button 
               onClick={() => { onClose(); navigate(`/products/${product.slug}`); }}
-              className="mt-6 text-center text-[17px] font-semibold text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="mt-6 text-center text-[14px] font-semibold text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
               View Full Details →
             </button>

@@ -53,12 +53,12 @@ export const ProductManagement = () => {
     <div className="flex flex-col gap-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Products</h1>
+          <h1 className="text-xl font-black tracking-tight text-gray-900 dark:text-white uppercase">Products</h1>
           <p className="text-gray-500 mt-1">Manage your inventory, pricing, and variants.</p>
         </div>
         <button 
           onClick={handleAddProduct}
-          className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-lg flex items-center gap-2 hover:opacity-80 transition-opacity whitespace-nowrap"
+          className="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-sm flex items-center gap-2 hover:opacity-80 transition-opacity whitespace-nowrap"
         >
           <Plus className="w-4 h-4" /> Add Product
         </button>
@@ -73,7 +73,7 @@ export const ProductManagement = () => {
               placeholder="Search products..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg pl-10 pr-4 py-2.5 text-lg focus:ring-2 focus:ring-blue-500 dark:text-white"
+              className="w-full bg-gray-50 dark:bg-[#222] border-none rounded-lg pl-10 pr-4 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 dark:text-white"
             />
           </div>
         </div>
@@ -82,11 +82,11 @@ export const ProductManagement = () => {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50 dark:bg-white/[0.02] border-b border-gray-200 dark:border-white/[0.05]">
-                <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Product</th>
-                <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Status</th>
-                <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Inventory</th>
-                <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest">Price</th>
-                <th className="p-4 text-lg font-bold text-gray-500 uppercase tracking-widest text-right">Actions</th>
+                <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Product</th>
+                <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Status</th>
+                <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Inventory</th>
+                <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest">Price</th>
+                <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -111,13 +111,13 @@ export const ProductManagement = () => {
                           )}
                         </div>
                         <div>
-                          <p className="font-bold text-lg text-gray-900 dark:text-white line-clamp-1">{product.title}</p>
-                          <p className="text-lg text-gray-500">{product.category?.name || 'Uncategorized'}</p>
+                          <p className="font-bold text-sm text-gray-900 dark:text-white line-clamp-1">{product.title}</p>
+                          <p className="text-sm text-gray-500">{product.category?.name || 'Uncategorized'}</p>
                         </div>
                       </div>
                     </td>
                     <td className="p-4">
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-[18px] font-bold uppercase tracking-wider ${
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-[15px] font-bold uppercase tracking-wider ${
                         product.status === 'ACTIVE' ? 'bg-green-50 text-green-600 dark:bg-green-500/10' :
                         product.status === 'DRAFT' ? 'bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-400' :
                         'bg-red-50 text-red-600 dark:bg-red-500/10'
@@ -125,10 +125,10 @@ export const ProductManagement = () => {
                         {product.status}
                       </span>
                     </td>
-                    <td className="p-4 text-lg font-medium text-gray-900 dark:text-white">
+                    <td className="p-4 text-sm font-medium text-gray-900 dark:text-white">
                       {product.stock} in stock
                     </td>
-                    <td className="p-4 text-lg font-bold text-gray-900 dark:text-white">
+                    <td className="p-4 text-sm font-bold text-gray-900 dark:text-white">
                       ${product.price.toFixed(2)}
                     </td>
                     <td className="p-4 text-right">

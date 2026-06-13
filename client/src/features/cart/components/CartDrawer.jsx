@@ -83,11 +83,11 @@ export const CartDrawer = () => {
                   <div className="w-20 h-20 bg-gray-100 dark:bg-white/[0.05] rounded-full flex items-center justify-center mb-6">
                     <ShoppingBag className="w-8 h-8 text-gray-400" />
                   </div>
-                  <h3 className="text-xl font-bold text-black dark:text-white mb-2">Your cart is empty</h3>
-                  <p className="text-gray-500 text-lg mb-8">Looks like you haven't added anything to your bag yet.</p>
+                  <h3 className="text-base font-bold text-black dark:text-white mb-2">Your cart is empty</h3>
+                  <p className="text-gray-500 text-sm mb-8">Looks like you haven't added anything to your bag yet.</p>
                   <button 
                     onClick={() => { dispatch(closeCartDrawer()); navigate('/products'); }}
-                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[17px] hover:opacity-80 transition-opacity"
+                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[14px] hover:opacity-80 transition-opacity"
                   >
                     Continue Shopping
                   </button>
@@ -106,12 +106,12 @@ export const CartDrawer = () => {
                           <Link 
                             to={`/products/${item.product?.slug || ''}`}
                             onClick={() => dispatch(closeCartDrawer())}
-                            className="font-bold text-[18px] text-black dark:text-white hover:underline line-clamp-2 leading-tight"
+                            className="font-bold text-[15px] text-black dark:text-white hover:underline line-clamp-2 leading-tight"
                           >
                             {item.product?.title || 'Unknown Product'}
                           </Link>
                         </div>
-                        <p className="text-[18px] font-bold text-gray-600 dark:text-gray-400">
+                        <p className="text-[15px] font-bold text-gray-600 dark:text-gray-400">
                           ${item.price.toFixed(2)}
                         </p>
                       </div>
@@ -124,7 +124,7 @@ export const CartDrawer = () => {
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="w-8 text-center text-[17px] font-bold text-black dark:text-white">{item.quantity}</span>
+                          <span className="w-8 text-center text-[14px] font-bold text-black dark:text-white">{item.quantity}</span>
                           <button 
                             onClick={() => item.product?._id && handleUpdateQuantity(item.product._id, item.quantity + 1)}
                             className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-black dark:hover:text-white transition-colors"
@@ -135,7 +135,7 @@ export const CartDrawer = () => {
                         
                         <button 
                           onClick={() => item.product?._id && handleRemove(item.product._id)}
-                          className="text-[17px] font-bold tracking-widest uppercase text-gray-400 hover:text-red-500 transition-colors"
+                          className="text-[14px] font-bold tracking-widest uppercase text-gray-400 hover:text-red-500 transition-colors"
                         >
                           Remove
                         </button>
@@ -150,19 +150,19 @@ export const CartDrawer = () => {
             {cartItems.length > 0 && (
               <div className="p-6 border-t border-[#E2E8F0] dark:border-white/[0.05] bg-gray-50 dark:bg-[#09090b]">
                 <div className="flex justify-between items-center mb-6">
-                  <span className="text-[18px] font-bold tracking-wide uppercase text-gray-500">Subtotal</span>
-                  <span className="text-2xl font-black text-black dark:text-white">${subtotal.toFixed(2)}</span>
+                  <span className="text-[15px] font-bold tracking-wide uppercase text-gray-500">Subtotal</span>
+                  <span className="text-lg font-black text-black dark:text-white">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex flex-col gap-3">
                   <button 
                     onClick={handleCheckout}
-                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[17px] hover:opacity-80 transition-opacity flex justify-center items-center gap-2"
+                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[14px] hover:opacity-80 transition-opacity flex justify-center items-center gap-2"
                   >
                     Checkout
                   </button>
                   <button 
                     onClick={handleViewCart}
-                    className="w-full py-4 bg-transparent border-2 border-black dark:border-white text-black dark:text-white font-bold uppercase tracking-widest text-[17px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                    className="w-full py-4 bg-transparent border-2 border-black dark:border-white text-black dark:text-white font-bold uppercase tracking-widest text-[14px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
                   >
                     View Cart
                   </button>

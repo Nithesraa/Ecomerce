@@ -72,7 +72,7 @@ export const ProductDetailPage = () => {
   if (error || !product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-32 flex flex-col items-center justify-center text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Product Not Found</h2>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Product Not Found</h2>
         <p className="text-gray-500 dark:text-gray-400">The product you're looking for doesn't exist or has been removed.</p>
       </div>
     );
@@ -119,7 +119,7 @@ export const ProductDetailPage = () => {
 
         {/* Right: Info (Sticky Purchase Panel) */}
         <div className="w-full lg:w-1/3 flex flex-col lg:sticky lg:top-32">
-          <p className="text-[17px] font-bold uppercase tracking-widest text-gray-500 mb-4">
+          <p className="text-[14px] font-bold uppercase tracking-widest text-gray-500 mb-4">
             {product.category?.name}
           </p>
           <h1 className="text-[40px] md:text-[50px] font-black text-black dark:text-white tracking-tighter uppercase leading-[0.9] mb-6">
@@ -129,7 +129,7 @@ export const ProductDetailPage = () => {
           <div className="flex items-center gap-4 mb-8">
             <StarRating rating={product.averageRating} count={product.reviewCount} />
             <div className="w-px h-4 bg-gray-300 dark:bg-gray-700" />
-            <span className="text-[17px] font-bold tracking-widest uppercase text-gray-500">
+            <span className="text-[14px] font-bold tracking-widest uppercase text-gray-500">
               SKU: {product.sku || 'N/A'}
             </span>
           </div>
@@ -140,27 +140,27 @@ export const ProductDetailPage = () => {
             </span>
             {product.discountPercentage > 0 && (
               <div className="flex flex-col">
-                <span className="text-[18px] text-gray-400 line-through font-bold">
+                <span className="text-[15px] text-gray-400 line-through font-bold">
                   ${product.price.toFixed(2)}
                 </span>
               </div>
             )}
             {product.discountPercentage > 0 && (
-              <span className="ml-auto px-3 py-1 bg-black dark:bg-white text-white dark:text-black font-bold tracking-widest text-[17px] uppercase">
+              <span className="ml-auto px-3 py-1 bg-black dark:bg-white text-white dark:text-black font-bold tracking-widest text-[14px] uppercase">
                 {product.discountPercentage}% OFF
               </span>
             )}
           </div>
 
-          <p className="text-gray-600 dark:text-gray-400 text-[17px] leading-relaxed mb-10">
+          <p className="text-gray-600 dark:text-gray-400 text-[14px] leading-relaxed mb-10">
             {product.description}
           </p>
 
           {/* Actions */}
           <div className="flex flex-col gap-6 mb-12">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[17px] font-bold tracking-widest uppercase text-black dark:text-white">Quantity</span>
-              <span className="text-[17px] font-bold tracking-widest uppercase text-gray-500">
+              <span className="text-[14px] font-bold tracking-widest uppercase text-black dark:text-white">Quantity</span>
+              <span className="text-[14px] font-bold tracking-widest uppercase text-gray-500">
                 {product.stock > 0 ? `${product.stock} IN STOCK` : <span className="text-red-500">OUT OF STOCK</span>}
               </span>
             </div>
@@ -188,14 +188,14 @@ export const ProductDetailPage = () => {
               <button 
                 onClick={handleAddToCart}
                 disabled={product.stock === 0}
-                className="w-full h-14 bg-black dark:bg-white text-white dark:text-black font-bold tracking-widest uppercase text-[17px] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-opacity"
+                className="w-full h-14 bg-black dark:bg-white text-white dark:text-black font-bold tracking-widest uppercase text-[14px] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 transition-opacity"
               >
                 <ShoppingBag className="w-5 h-5" />
                 Add To Bag
               </button>
               <button 
                 onClick={handleWishlist}
-                className="w-full h-14 border-2 border-black dark:border-white bg-transparent text-black dark:text-white font-bold tracking-widest uppercase text-[17px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors flex items-center justify-center gap-3"
+                className="w-full h-14 border-2 border-black dark:border-white bg-transparent text-black dark:text-white font-bold tracking-widest uppercase text-[14px] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors flex items-center justify-center gap-3"
               >
                 <Heart className="w-5 h-5" />
                 Wishlist
@@ -207,15 +207,15 @@ export const ProductDetailPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6 border border-[#E2E8F0] dark:border-white/[0.1] bg-gray-50 dark:bg-white/[0.02]">
             <div className="flex items-center gap-3">
               <Truck className="w-5 h-5 text-black dark:text-white" />
-              <span className="text-[17px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Fast Delivery</span>
+              <span className="text-[14px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Fast Delivery</span>
             </div>
             <div className="flex items-center gap-3">
               <ShieldCheck className="w-5 h-5 text-black dark:text-white" />
-              <span className="text-[17px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Secure Checkout</span>
+              <span className="text-[14px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Secure Checkout</span>
             </div>
             <div className="flex items-center gap-3">
               <RefreshCcw className="w-5 h-5 text-black dark:text-white" />
-              <span className="text-[17px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Easy Returns</span>
+              <span className="text-[14px] font-bold tracking-widest uppercase text-gray-600 dark:text-gray-400">Easy Returns</span>
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@ export const ProductDetailPage = () => {
             <button 
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-4 font-black tracking-widest uppercase text-[18px] md:text-[18px] transition-colors border-b-2 -mb-0.5 ${
+              className={`pb-4 font-black tracking-widest uppercase text-[15px] md:text-[15px] transition-colors border-b-2 -mb-0.5 ${
                 activeTab === tab 
                   ? 'border-black dark:border-white text-black dark:text-white' 
                   : 'border-transparent text-gray-400 hover:text-black dark:hover:text-white'
@@ -239,7 +239,7 @@ export const ProductDetailPage = () => {
           ))}
         </div>
 
-        <div className="min-h-[200px] text-gray-600 dark:text-gray-400 leading-relaxed text-[17px] max-w-4xl">
+        <div className="min-h-[200px] text-gray-600 dark:text-gray-400 leading-relaxed text-[14px] max-w-4xl">
           {activeTab === 'description' && (
             <div className="animate-in fade-in duration-500">
               <p>{product.description}</p>
@@ -267,7 +267,7 @@ export const ProductDetailPage = () => {
       {/* Similar Products (AI) Section */}
       {similarProducts?.length > 0 && (
         <div className="w-full pt-16 border-t border-gray-200 dark:border-white/[0.1] mb-16">
-          <h2 className="text-[30px] font-black tracking-tighter uppercase text-black dark:text-white mb-10">Customers Also Bought</h2>
+          <h2 className="text-xl font-black tracking-tighter uppercase text-black dark:text-white mb-10">Customers Also Bought</h2>
           <ProductGrid products={similarProducts} loading={false} />
         </div>
       )}
@@ -275,7 +275,7 @@ export const ProductDetailPage = () => {
       {/* Related Products Section */}
       {relatedProducts?.length > 0 && (
         <div className="w-full pt-16 border-t border-gray-200 dark:border-white/[0.1]">
-          <h2 className="text-[30px] font-black tracking-tighter uppercase text-black dark:text-white mb-10">You May Also Like</h2>
+          <h2 className="text-xl font-black tracking-tighter uppercase text-black dark:text-white mb-10">You May Also Like</h2>
           <RelatedProducts products={relatedProducts} />
         </div>
       )}

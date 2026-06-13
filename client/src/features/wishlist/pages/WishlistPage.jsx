@@ -45,12 +45,12 @@ export const WishlistPage = () => {
           <Heart className="w-10 h-10 text-gray-400" />
         </div>
         <h1 className="text-[40px] md:text-[50px] font-black uppercase tracking-tighter mb-4 text-center leading-none">No Saved Items</h1>
-        <p className="text-gray-500 mb-10 text-center max-w-md text-[17px]">
+        <p className="text-gray-500 mb-10 text-center max-w-md text-[14px]">
           Your wishlist is currently empty. Start saving items you love by clicking the heart icon.
         </p>
         <button 
           onClick={() => navigate('/products')}
-          className="px-10 py-5 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[17px] hover:opacity-80 transition-opacity"
+          className="px-10 py-5 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[14px] hover:opacity-80 transition-opacity"
         >
           Explore Products
         </button>
@@ -63,7 +63,7 @@ export const WishlistPage = () => {
       <div className="max-w-[1400px] mx-auto w-full">
         <div className="flex items-end justify-between border-b-2 border-black dark:border-white pb-6 mb-12">
           <h1 className="text-[40px] md:text-[50px] font-black uppercase tracking-tighter leading-none">Wishlist</h1>
-          <span className="text-[18px] font-bold tracking-widest uppercase text-gray-500">{items.length} Items</span>
+          <span className="text-[15px] font-bold tracking-widest uppercase text-gray-500">{items.length} Items</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -90,7 +90,7 @@ export const WishlistPage = () => {
                   <button 
                     onClick={(e) => { e.preventDefault(); handleMoveToCart(product); }}
                     disabled={product.stock === 0}
-                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[18px] flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-[15px] flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <ShoppingBag className="w-4 h-4" />
                     {product.stock === 0 ? 'Out of Stock' : 'Move to Cart'}
@@ -99,20 +99,20 @@ export const WishlistPage = () => {
               </div>
 
               <Link to={`/products/${product.slug}`} className="flex flex-col">
-                <p className="text-[17px] font-bold uppercase tracking-widest text-gray-500 mb-1">
+                <p className="text-[14px] font-bold uppercase tracking-widest text-gray-500 mb-1">
                   {product.category?.name || 'Category'}
                 </p>
-                <h3 className="text-[18px] font-black uppercase tracking-tight text-black dark:text-white leading-tight mb-2">
+                <h3 className="text-[15px] font-black uppercase tracking-tight text-black dark:text-white leading-tight mb-2">
                   {product.title}
                 </h3>
                 <div className="flex items-center gap-3">
-                  <span className="text-[18px] font-black text-black dark:text-white">
+                  <span className="text-[15px] font-black text-black dark:text-white">
                     ${(product.discountPercentage > 0 
                         ? product.price - (product.price * (product.discountPercentage / 100))
                         : product.price).toFixed(2)}
                   </span>
                   {product.discountPercentage > 0 && (
-                    <span className="text-[18px] font-bold text-gray-400 line-through">
+                    <span className="text-[15px] font-bold text-gray-400 line-through">
                       ${product.price.toFixed(2)}
                     </span>
                   )}

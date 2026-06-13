@@ -65,8 +65,8 @@ export const AdminAuthPage = () => {
             <div className="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mb-6">
               <Shield className="w-8 h-8 text-blue-500" />
             </div>
-            <h1 className="text-xl font-black uppercase tracking-[0.2em] text-white">System Access</h1>
-            <p className="text-lg text-gray-500 font-mono mt-2 uppercase tracking-widest">Restricted Internal Portal</p>
+            <h1 className="text-base font-black uppercase tracking-widest text-white">System Access</h1>
+            <p className="text-sm text-gray-500 font-mono mt-2 uppercase tracking-widest">Restricted Internal Portal</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -79,11 +79,11 @@ export const AdminAuthPage = () => {
                   {...register('email')}
                   type="email"
                   disabled={isLoading}
-                  className="w-full bg-black/50 border border-white/[0.1] text-white pl-11 pr-4 py-3.5 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none font-mono text-lg placeholder:text-gray-700"
+                  className="w-full bg-black/50 border border-white/[0.1] text-white pl-11 pr-4 py-3.5 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none font-mono text-sm placeholder:text-gray-700"
                   placeholder="admin@internal.com"
                 />
               </div>
-              {errors.email && <p className="text-red-500 text-[18px] font-mono mt-2 uppercase">{errors.email.message}</p>}
+              {errors.email && <p className="text-red-500 text-[15px] font-mono mt-2 uppercase">{errors.email.message}</p>}
             </div>
 
             <div>
@@ -95,23 +95,23 @@ export const AdminAuthPage = () => {
                   {...register('password')}
                   type="password"
                   disabled={isLoading}
-                  className="w-full bg-black/50 border border-white/[0.1] text-white pl-11 pr-4 py-3.5 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none font-mono text-lg placeholder:text-gray-700"
+                  className="w-full bg-black/50 border border-white/[0.1] text-white pl-11 pr-4 py-3.5 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none font-mono text-sm placeholder:text-gray-700"
                   placeholder="••••••••••••••••"
                 />
               </div>
-              {errors.password && <p className="text-red-500 text-[18px] font-mono mt-2 uppercase">{errors.password.message}</p>}
+              {errors.password && <p className="text-red-500 text-[15px] font-mono mt-2 uppercase">{errors.password.message}</p>}
             </div>
 
             {error && (
               <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-                <p className="text-red-500 text-[17px] font-mono text-center uppercase tracking-widest">{error}</p>
+                <p className="text-red-500 text-[14px] font-mono text-center uppercase tracking-widest">{error}</p>
               </div>
             )}
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-white text-black font-black uppercase tracking-[0.2em] text-[17px] py-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:bg-gray-200 disabled:opacity-50"
+              className="w-full bg-white text-black font-black uppercase tracking-widest text-[14px] py-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:bg-gray-200 disabled:opacity-50"
             >
               {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Authenticate'}
               {!isLoading && <ArrowRight className="w-4 h-4" />}
@@ -119,7 +119,7 @@ export const AdminAuthPage = () => {
           </form>
 
           <div className="mt-8 pt-6 border-t border-white/[0.05] text-center">
-            <p className="text-[18px] font-mono text-gray-600 uppercase tracking-widest">
+            <p className="text-[15px] font-mono text-gray-600 uppercase tracking-widest">
               Unauthorized access is strictly prohibited and logged.
             </p>
           </div>
