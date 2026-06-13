@@ -62,13 +62,13 @@ export const FloatingNav = () => {
           ShopSphere
         </Link>
 
-        {/* Center: Links (Hidden on Mobile) */}
-        <nav className="hidden md:flex items-center gap-10">
+        {/* Center: Links (Hidden on Mobile/Tablet) */}
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
           {['New Arrivals', 'Men', 'Women', 'Collections'].map((link) => (
             <Link 
               key={link} 
               to="/products" 
-              className={`text-[17px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity ${textClasses}`}
+              className={`text-[14px] xl:text-[16px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap ${textClasses}`}
             >
               {link}
             </Link>
@@ -76,7 +76,7 @@ export const FloatingNav = () => {
           {isAuthenticated && (user?.role === 'ADMIN' || user?.role === 'SELLER') && (
             <Link 
               to="/dashboard" 
-              className={`text-[17px] font-black text-[#2563EB] tracking-widest uppercase hover:opacity-70 transition-opacity`}
+              className={`text-[14px] xl:text-[16px] font-black text-[#2563EB] tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap`}
             >
               Workspace
             </Link>
@@ -84,11 +84,11 @@ export const FloatingNav = () => {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 xl:gap-6">
           {!isAuthenticated && (
             <Link 
               to="/seller/register"
-              className={`hidden md:flex items-center justify-center h-10 px-5 rounded-full border border-current ${textClasses} text-[18px] font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors`}
+              className={`hidden lg:flex items-center justify-center h-9 xl:h-10 px-4 xl:px-5 rounded-full border border-current ${textClasses} text-[13px] xl:text-[15px] font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors whitespace-nowrap`}
             >
               Become a Seller
             </Link>
@@ -112,7 +112,7 @@ export const FloatingNav = () => {
           ) : (
             <Link 
               to="/login"
-              className="hidden md:flex items-center justify-center h-9 px-5 rounded-full bg-[#2563EB] text-white text-[17px] font-bold uppercase tracking-widest hover:bg-[#1D4ED8] transition-colors"
+              className="hidden lg:flex items-center justify-center h-9 px-5 rounded-full bg-[#2563EB] text-white text-[14px] xl:text-[16px] font-bold uppercase tracking-widest hover:bg-[#1D4ED8] transition-colors whitespace-nowrap"
             >
               Log In
             </Link>

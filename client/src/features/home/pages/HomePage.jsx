@@ -60,7 +60,7 @@ export const HomePage = () => {
           transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           className="relative z-10 w-full px-6 md:px-12 flex flex-col items-center text-center mt-20"
         >
-          <h1 className="text-[60px] sm:text-[100px] md:text-[140px] font-black text-white leading-none tracking-tighter uppercase mb-6 drop-shadow-xl">
+          <h1 className="text-[50px] sm:text-[80px] md:text-[100px] lg:text-[120px] xl:text-[140px] font-black text-white leading-none tracking-tighter uppercase mb-6 drop-shadow-xl">
             Engineered <br /> for Everyday.
           </h1>
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
@@ -83,8 +83,8 @@ export const HomePage = () => {
       {/* Recommended For You Section */}
       {(recommendedProducts?.length > 0 || recLoading) && (
         <section className="w-full px-6 md:px-12 pt-32 pb-16 border-b border-gray-200 dark:border-white/[0.1]">
-          <div className="flex items-end justify-between mb-16">
-            <h2 className="text-[40px] md:text-[60px] font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+          <div className="flex items-end justify-between mb-10 md:mb-16">
+            <h2 className="text-[32px] md:text-[50px] lg:text-[60px] font-black text-black dark:text-white uppercase tracking-tighter leading-none">
               Recommended For You
             </h2>
             <Link to="/products" className="text-[14px] font-bold tracking-widest uppercase text-gray-500 hover:text-black dark:hover:text-white transition-colors border-b-2 border-transparent hover:border-black dark:hover:border-white pb-1">
@@ -97,8 +97,8 @@ export const HomePage = () => {
 
       {/* Shop By Category */}
       <section className="w-full px-6 md:px-12 py-24 md:py-32">
-        <div className="flex items-end justify-between mb-16">
-          <h2 className="text-[40px] md:text-[60px] font-black text-black dark:text-white uppercase tracking-tighter leading-none">
+        <div className="flex items-end justify-between mb-10 md:mb-16">
+          <h2 className="text-[32px] md:text-[50px] lg:text-[60px] font-black text-black dark:text-white uppercase tracking-tighter leading-none">
             Shop By Category
           </h2>
         </div>
