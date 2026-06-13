@@ -46,7 +46,7 @@ export const FloatingNav = () => {
         <div className="w-full bg-black dark:bg-white text-white dark:text-black py-2.5 overflow-hidden flex items-center absolute top-0 inset-x-0 z-[60]">
           <div className="animate-marquee whitespace-nowrap flex gap-10 items-center">
             {[...Array(6)].map((_, i) => (
-              <span key={i} className="text-[17px] font-bold uppercase tracking-[0.2em]">
+              <span key={i} className="text-[12px] font-bold uppercase tracking-[0.2em]">
                 Free Worldwide Shipping on orders over $150 <span className="mx-8 opacity-40">•</span> Just Dropped: The Winter Collection
               </span>
             ))}
@@ -58,17 +58,17 @@ export const FloatingNav = () => {
         <div className="w-full px-6 md:px-12 flex items-center justify-between">
         
         {/* Left: Logo */}
-        <Link to="/" className={`text-2xl font-black tracking-tighter uppercase ${textClasses}`}>
+        <Link to="/" className={`text-xl font-black tracking-tighter uppercase ${textClasses}`}>
           ShopSphere
         </Link>
 
         {/* Center: Links (Hidden on Mobile/Tablet) */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
           {['New Arrivals', 'Men', 'Women', 'Collections'].map((link) => (
             <Link 
               key={link} 
               to="/products" 
-              className={`text-[14px] xl:text-[16px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap ${textClasses}`}
+              className={`text-[12px] xl:text-[13px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap ${textClasses}`}
             >
               {link}
             </Link>
@@ -76,7 +76,7 @@ export const FloatingNav = () => {
           {isAuthenticated && (user?.role === 'ADMIN' || user?.role === 'SELLER') && (
             <Link 
               to="/dashboard" 
-              className={`text-[14px] xl:text-[16px] font-black text-[#2563EB] tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap`}
+              className={`text-[12px] xl:text-[13px] font-black text-[#2563EB] tracking-widest uppercase hover:opacity-70 transition-opacity whitespace-nowrap`}
             >
               Workspace
             </Link>
@@ -84,11 +84,11 @@ export const FloatingNav = () => {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-4 xl:gap-6">
+        <div className="flex items-center gap-3 xl:gap-6">
           {!isAuthenticated && (
             <Link 
               to="/seller/register"
-              className={`hidden lg:flex items-center justify-center h-9 xl:h-10 px-4 xl:px-5 rounded-full border border-current ${textClasses} text-[13px] xl:text-[15px] font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors whitespace-nowrap`}
+              className={`hidden lg:flex items-center justify-center h-8 xl:h-9 px-3 xl:px-4 rounded-full border border-current ${textClasses} text-[11px] xl:text-[12px] font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors whitespace-nowrap`}
             >
               Become a Seller
             </Link>
@@ -112,7 +112,7 @@ export const FloatingNav = () => {
           ) : (
             <Link 
               to="/login"
-              className="hidden lg:flex items-center justify-center h-9 px-5 rounded-full bg-[#2563EB] text-white text-[14px] xl:text-[16px] font-bold uppercase tracking-widest hover:bg-[#1D4ED8] transition-colors whitespace-nowrap"
+              className="hidden lg:flex items-center justify-center h-8 px-4 rounded-full bg-[#2563EB] text-white text-[12px] xl:text-[13px] font-bold uppercase tracking-widest hover:bg-[#1D4ED8] transition-colors whitespace-nowrap"
             >
               Log In
             </Link>
