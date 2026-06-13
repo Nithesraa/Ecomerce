@@ -7,6 +7,8 @@ try {
   if (userStr) user = JSON.parse(userStr);
 } catch (e) {
   localStorage.removeItem('user');
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
 }
 
 const initialState = {
@@ -19,8 +21,10 @@ const initialState = {
 export const loginUser = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
   try {
     const response = await authService.login(credentials);
-    const user = response.data;
+    const { user, accessToken, refreshToken } = response.data;
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
     return user;
   } catch (error) {
     const message = error.response?.data?.message || 'Login failed';
@@ -45,6 +49,8 @@ export const logoutUser = createAsyncThunk('auth/logout', async (_, thunkAPI) =>
     console.error('Logout error', error);
   } finally {
     localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 });
 
@@ -55,6 +61,8 @@ export const fetchCurrentUser = createAsyncThunk('auth/me', async (_, thunkAPI) 
     return response.data;
   } catch (error) {
     localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     return thunkAPI.rejectWithValue('Session expired');
   }
 });
@@ -68,6 +76,8 @@ const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       localStorage.removeItem('user');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
     }
   },
   extraReducers: (builder) => {

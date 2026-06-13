@@ -19,14 +19,14 @@ export const authController = {
     try {
       const { user, accessToken, refreshToken } = await authService.login(req.body);
 
-      // Set secure HTTP-only cookies
-      res.cookie('accessToken', accessToken, getCookieOptions(0.01)); // ~15 mins
-      res.cookie('refreshToken', refreshToken, getCookieOptions(7)); // 7 days
-
       res.status(200).json({
         success: true,
         message: 'Login successful',
-        data: user,
+        data: {
+          user,
+          accessToken,
+          refreshToken
+        },
       });
     } catch (error) {
       next(error);
@@ -35,26 +35,29 @@ export const authController = {
 
   refreshToken: async (req, res, next) => {
     try {
-      const incomingToken = req.cookies?.refreshToken;
-      const { accessToken, refreshToken } = await authService.refreshToken(incomingToken);
+      const incomingToken = req.body?.refreshToken;
+      if (!incomingToken) {
+        return res.status(401).json({ success: false, message: 'Refresh token required' });
+      }
 
-      res.cookie('accessToken', accessToken, getCookieOptions(0.01));
-      res.cookie('refreshToken', refreshToken, getCookieOptions(7));
+      const { accessToken, refreshToken } = await authService.refreshToken(incomingToken);
 
       res.status(200).json({
         success: true,
         message: 'Tokens refreshed',
+        data: {
+          accessToken,
+          refreshToken
+        }
       });
     } catch (error) {
-      res.clearCookie('accessToken', getClearCookieOptions());
-      res.clearCookie('refreshToken', getClearCookieOptions());
       next(error);
     }
   },
 
   logout: async (req, res, next) => {
     try {
-      const incomingToken = req.cookies?.refreshToken;
+      const incomingToken = req.body?.refreshToken;
       if (incomingToken) {
         try {
           const { verifyRefreshToken } = await import('../utils/jwt.js');
@@ -62,9 +65,6 @@ export const authController = {
           await authService.logout(decoded.id);
         } catch(e) {}
       }
-
-      res.clearCookie('accessToken', getClearCookieOptions());
-      res.clearCookie('refreshToken', getClearCookieOptions());
 
       res.status(200).json({
         success: true,

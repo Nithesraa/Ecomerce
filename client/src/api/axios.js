@@ -12,8 +12,10 @@ export const axiosInstance = axios.create({
 // Request Interceptor
 axiosInstance.interceptors.request.use(
   (config) => {
-    // With HTTP-Only cookies, the browser attaches tokens automatically.
-    // No need to manually inject Authorization headers.
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => Promise.reject(error)
@@ -29,17 +31,27 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        // Attempt to refresh token using the http-only refresh cookie
-        const res = await axios.post(`${axiosInstance.defaults.baseURL}/auth/refresh-token`, {}, { withCredentials: true });
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (!refreshToken) throw new Error('No refresh token available');
+
+        // Attempt to refresh token
+        const res = await axios.post(`${axiosInstance.defaults.baseURL}/auth/refresh-token`, { refreshToken });
         
         if (res.data?.success) {
-          // Cookies are automatically updated by the browser from the Set-Cookie headers
-          // We just need to retry the original request
+          const newAccessToken = res.data.data.accessToken;
+          const newRefreshToken = res.data.data.refreshToken;
+          
+          localStorage.setItem('accessToken', newAccessToken);
+          localStorage.setItem('refreshToken', newRefreshToken);
+          
+          originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           return axiosInstance(originalRequest);
         }
       } catch (refreshError) {
         // If refresh fails, user must log in again
         localStorage.removeItem('user');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
         toast.error('Session expired. Please log in again.');
         window.location.href = '/login';
         return Promise.reject(refreshError);

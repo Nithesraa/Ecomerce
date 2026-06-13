@@ -12,7 +12,8 @@ export const authService = {
   },
 
   logout: async () => {
-    const response = await axiosInstance.post('/auth/logout');
+    const refreshToken = localStorage.getItem('refreshToken');
+    const response = await axiosInstance.post('/auth/logout', { refreshToken });
     return response;
   },
 
