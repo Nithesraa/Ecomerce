@@ -1,7 +1,7 @@
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { LayoutDashboard, Package, ShoppingBag, Tag, Grid, LogOut, Store, Users, ShoppingCart, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingBag, Tag, Grid, LogOut, Store, Users, ShoppingCart, BarChart3, Menu, X } from 'lucide-react';
 import { logoutUser } from '../../features/auth/authSlice.js';
 
 const NAV_ITEMS = [
@@ -17,6 +17,7 @@ export const AdminLayout = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -46,13 +47,24 @@ export const AdminLayout = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a] flex">
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-20 md:hidden" 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-white dark:bg-[#111111] border-r border-gray-200 dark:border-white/[0.05] flex flex-col fixed h-full z-20">
-        <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-white/[0.05]">
+      <aside className={`w-64 bg-white dark:bg-[#111111] border-r border-gray-200 dark:border-white/[0.05] flex flex-col fixed h-full z-30 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+        <div className="h-16 flex items-center justify-between px-6 border-b border-gray-200 dark:border-white/[0.05]">
           <h1 className="text-base font-black tracking-tighter uppercase flex items-center gap-2 text-black dark:text-white">
             <Store className="w-5 h-5" />
             Workspace
           </h1>
+          <button className="md:hidden text-gray-500 hover:text-black dark:hover:text-white transition-colors" onClick={() => setIsSidebarOpen(false)}>
+            <X className="w-6 h-6" />
+          </button>
         </div>
 
         <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
@@ -63,6 +75,7 @@ export const AdminLayout = () => {
                 key={item.name}
                 to={item.path}
                 end={item.path === '/dashboard'}
+                onClick={() => setIsSidebarOpen(false)}
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${
                     isActive
@@ -99,11 +112,16 @@ export const AdminLayout = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 ml-64 flex flex-col min-h-screen relative">
-        <header className="h-16 bg-white/80 dark:bg-[#111111]/80 backdrop-blur-md border-b border-gray-200 dark:border-white/[0.05] flex items-center justify-between px-8 sticky top-0 z-10">
-          <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Dashboard</h2>
+      <main className="flex-1 md:ml-64 flex flex-col min-h-screen relative w-full overflow-x-hidden">
+        <header className="h-16 bg-white/80 dark:bg-[#111111]/80 backdrop-blur-md border-b border-gray-200 dark:border-white/[0.05] flex items-center justify-between px-4 md:px-8 sticky top-0 z-10 w-full">
+          <div className="flex items-center gap-3">
+            <button className="md:hidden text-black dark:text-white" onClick={() => setIsSidebarOpen(true)}>
+              <Menu className="w-6 h-6" />
+            </button>
+            <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest hidden md:block">Dashboard</h2>
+          </div>
           <NavLink to="/" className="text-sm font-medium text-blue-500 hover:underline">
-            View Storefront &rarr;
+            Storefront &rarr;
           </NavLink>
         </header>
         <div className="flex-1 p-8">
