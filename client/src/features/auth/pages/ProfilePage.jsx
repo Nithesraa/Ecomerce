@@ -76,35 +76,35 @@ export const ProfilePage = () => {
         {/* Sidebar */}
         <div className="w-full md:w-1/4 flex flex-col gap-12 shrink-0">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-4">Account</h1>
-            <p className="text-lg font-semibold tracking-[0.2em] text-gray-500 uppercase">Welcome, {user?.email?.split('@')[0]}</p>
+            <h1 className="text-3xl md:text-4xl font-bold uppercase tracking-tighter mb-4">Account</h1>
+            <p className="text-[13px] md:text-[15px] font-semibold tracking-[0.2em] text-gray-500 uppercase">Welcome, {user?.email?.split('@')[0]}</p>
           </div>
           
           <nav className="flex flex-col gap-8">
             <button 
               onClick={() => setActiveTab('overview')}
-              className={`text-left text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'overview' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'overview' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
             >
               Overview
               {activeTab === 'overview' && <span className="w-8 h-px bg-black dark:bg-white inline-block"></span>}
             </button>
             <button 
               onClick={() => setActiveTab('orders')}
-              className={`text-left text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'orders' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'orders' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
             >
               Order History
               {activeTab === 'orders' && <span className="w-8 h-px bg-black dark:bg-white inline-block"></span>}
             </button>
             <button 
               onClick={() => setActiveTab('saved')}
-              className={`text-left text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'saved' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'saved' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
             >
               Saved Items
               {activeTab === 'saved' && <span className="w-8 h-px bg-black dark:bg-white inline-block"></span>}
             </button>
             <button 
               onClick={() => setActiveTab('details')}
-              className={`text-left text-lg font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'details' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] transition-all duration-300 flex items-center justify-between group ${activeTab === 'details' ? 'text-black dark:text-white' : 'text-gray-400 hover:text-black dark:hover:text-white'}`}
             >
               Account Details
               {activeTab === 'details' && <span className="w-8 h-px bg-black dark:bg-white inline-block"></span>}
@@ -112,14 +112,14 @@ export const ProfilePage = () => {
             {user?.role === 'ADMIN' || user?.role === 'SELLER' ? (
               <button 
                 onClick={() => navigate('/dashboard')}
-                className="text-left text-lg font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 flex items-center justify-between"
+                className="text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] text-gray-400 hover:text-black dark:hover:text-white transition-all duration-300 flex items-center justify-between"
               >
                 Go to Workspace
               </button>
             ) : null}
             <button 
               onClick={handleLogout}
-              className="text-left text-lg font-bold uppercase tracking-[0.2em] text-red-500 hover:text-red-600 transition-all duration-300 flex items-center justify-between mt-8"
+              className="text-left text-[13px] md:text-[15px] font-bold uppercase tracking-[0.15em] text-red-500 hover:text-red-600 transition-all duration-300 flex items-center justify-between mt-8"
             >
               Log Out
             </button>
@@ -141,16 +141,16 @@ export const ProfilePage = () => {
                 {/* Stats Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
-                    <p className="text-lg font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Total Orders</p>
-                    <p className="text-4xl font-light">{pagination?.total || orders.length}</p>
+                    <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Total Orders</p>
+                    <p className="text-3xl md:text-4xl font-light">{pagination?.total || orders.length}</p>
                   </div>
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
-                    <p className="text-lg font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Total Spent</p>
-                    <p className="text-4xl font-light">${totalSpent.toFixed(2)}</p>
+                    <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Total Spent</p>
+                    <p className="text-3xl md:text-4xl font-light">${totalSpent.toFixed(2)}</p>
                   </div>
                   <div className="border-t border-black/10 dark:border-white/10 pt-6">
-                    <p className="text-lg font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Saved Items</p>
-                    <p className="text-4xl font-light">{wishlistItems.length}</p>
+                    <p className="text-[13px] md:text-sm font-bold tracking-widest text-gray-500 uppercase mb-4">Saved Items</p>
+                    <p className="text-3xl md:text-4xl font-light">{wishlistItems.length}</p>
                   </div>
                 </div>
 
@@ -174,15 +174,15 @@ export const ProfilePage = () => {
                             {formatDate(order.createdAt)}
                           </div>
                           <div className="col-span-2">
-                            <span className={`text-lg font-bold uppercase tracking-[0.2em] ${getStatusColor(order.orderStatus)}`}>{order.orderStatus}</span>
+                            <span className={`text-[12px] xl:text-[14px] font-bold uppercase tracking-wider ${getStatusColor(order.orderStatus)}`}>{order.orderStatus}</span>
                           </div>
                           <div className="col-span-2 md:text-right">
-                            <span className="text-lg font-medium">${order.totalAmount.toFixed(2)}</span>
+                            <span className="text-[14px] xl:text-[16px] font-medium">${order.totalAmount.toFixed(2)}</span>
                           </div>
                           <div className="col-span-2 flex justify-start md:justify-end mt-4 md:mt-0">
                             <button 
                               onClick={() => handleViewOrder(order._id)}
-                              className="text-lg font-bold tracking-[0.2em] uppercase text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-colors pb-0.5"
+                              className="text-[12px] xl:text-[14px] font-bold tracking-widest uppercase text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-colors pb-0.5"
                             >
                               View Details
                             </button>
@@ -336,20 +336,20 @@ export const ProfilePage = () => {
                           {formatDate(order.createdAt)}
                         </div>
                         <div className="col-span-2">
-                          <span className={`text-[15px] font-bold uppercase tracking-[0.2em] ${getStatusColor(order.orderStatus)}`}>{order.orderStatus}</span>
+                          <span className={`text-[12px] xl:text-[14px] font-bold uppercase tracking-wider ${getStatusColor(order.orderStatus)}`}>{order.orderStatus}</span>
                         </div>
                         <div className="col-span-2">
-                          <span className={`text-[12px] font-bold uppercase tracking-[0.2em] px-3 py-1 border ${order.paymentStatus === 'PAID' ? 'border-green-500 text-green-500' : order.paymentStatus === 'FAILED' ? 'border-red-500 text-red-500' : 'border-yellow-500 text-yellow-500'}`}>
+                          <span className={`text-[11px] xl:text-[12px] font-bold uppercase tracking-wider px-3 py-1 border ${order.paymentStatus === 'PAID' ? 'border-green-500 text-green-500' : order.paymentStatus === 'FAILED' ? 'border-red-500 text-red-500' : 'border-yellow-500 text-yellow-500'}`}>
                             {order.paymentStatus || 'PENDING'}
                           </span>
                         </div>
                         <div className="col-span-1 md:text-right">
-                          <span className="text-lg font-medium">${order.totalAmount.toFixed(2)}</span>
+                          <span className="text-[14px] xl:text-[16px] font-medium">${order.totalAmount.toFixed(2)}</span>
                         </div>
                         <div className="col-span-2 flex justify-start md:justify-end mt-4 md:mt-0">
                           <button 
                             onClick={() => handleViewOrder(order._id)}
-                            className="text-[14px] font-bold tracking-[0.2em] uppercase text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-colors pb-0.5"
+                            className="text-[12px] xl:text-[14px] font-bold tracking-widest uppercase text-black dark:text-white border-b border-transparent hover:border-black dark:hover:border-white transition-colors pb-0.5"
                           >
                             Details
                           </button>
