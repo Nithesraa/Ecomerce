@@ -26,13 +26,13 @@ const logger = winston.createLogger({
   ],
 });
 
-// If we're not in production then log to the `console` with custom format
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(
-    new winston.transports.Console({
-      format: combine(colorize(), myFormat),
-    })
-  );
-}
+// Always log to console, especially important for platforms like Railway
+logger.add(
+  new winston.transports.Console({
+    format: process.env.NODE_ENV === 'production' 
+      ? combine(timestamp(), winston.format.json()) 
+      : combine(colorize(), myFormat),
+  })
+);
 
 export default logger;
